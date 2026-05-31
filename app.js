@@ -11,7 +11,7 @@ const LEARNING_LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbxUF7um8w
 const STUDENT_PROFILE_KEY = "info1TrainingStudentProfileV1";
 const PENDING_LOGS_KEY = "info1TrainingPendingLearningLogsV1";
 const MAX_PENDING_LOGS = 50;
-const UPDATE_HISTORY_URL = "data/update-history.json";
+const UPDATE_HISTORY_URL = "update-history.json";
 const UPDATE_HISTORY_LIMIT = 10;
 const HISTORY_PAGE_SIZE = 10;
 
@@ -1205,7 +1205,7 @@ async function loadUpdateHistory(){
     const updates = await response.json();
     renderUpdateHistory(updates);
   }catch(error){
-    if(list) list.innerHTML = '<div class="update-empty">更新履歴を読み込めませんでした。GitHub Pages上で確認するか、data/update-history.json を確認してください。</div>';
+    if(list) list.innerHTML = '<div class="update-empty">更新履歴を読み込めませんでした。GitHub Pages上で確認するか、update-history.json を確認してください。</div>';
     if(message) message.textContent = 'ローカルで直接HTMLを開いている場合、ブラウザの制限でJSONを読み込めないことがあります。';
     if(badge) badge.textContent = '読み込み失敗';
   }
@@ -1284,7 +1284,7 @@ function init(){
   $('toHomeBtn').addEventListener('click', () => { renderHome(); showPanel('home'); });
   $('retryBtn').addEventListener('click', () => startQuiz(lastConfig));
   $('reviewSessionWrongBtn').addEventListener('click', startSessionWrongReview);
-  $('nextBtn').addEventListener('click', nextQuestion);
+  $('nextBtn').onclick = nextQuestion;
   document.querySelectorAll('.confidence-choice').forEach(btn => btn.addEventListener('click', () => setConfidence(btn.dataset.confidence)));
   renderHome();
 }
@@ -1432,6 +1432,10 @@ function startQuiz(config, customQuestions = null){
 
 function renderQuestion(){
   const q = sessionQuestions[currentIndex];
+  if($('nextBtn')){
+    $('nextBtn').disabled = true;
+    $('nextBtn').textContent = '次の問題へ';
+  }
   $('feedback').className = 'card feedback hidden';
   resetConfidenceChoices();
   $('progressText').textContent = `問題 ${currentIndex + 1} / ${sessionQuestions.length}`;
@@ -1476,6 +1480,7 @@ function answerQuestion(selected){
   $('correctAnswer').textContent = `正解：${q.choices[q.answer]}`;
   $('explanation').textContent = q.explanation;
   $('nextBtn').textContent = currentIndex + 1 === sessionQuestions.length ? '結果を見る' : '次の問題へ';
+  $('nextBtn').disabled = false;
   $('feedback').classList.remove('hidden');
   $('progressBar').style.width = `${(currentIndex + 1) / sessionQuestions.length * 100}%`;
   scrollToFeedback();
