@@ -4301,7 +4301,7 @@ const QUESTIONS = [
     "category": "プログラミング",
     "difficulty": "advanced",
     "question": "次のフローチャートを実行したとき、表示される値として正しいものはどれか。",
-    "figureSvg": "<svg viewBox=\"0 0 650 560\" role=\"img\" aria-label=\"aとbを更新しながらa+bを表示するフローチャート\" class=\"flowchart-svg\"><defs><marker id=\"alg_fig_003_arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L0,6 L9,3 z\" class=\"flow-arrow-head\"/></marker></defs><rect x=\"260\" y=\"20\" width=\"120\" height=\"44\" rx=\"14\" class=\"flow-box\"/><text x=\"320.0\" y=\"42.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">開始</text><path d=\"M320,64 L320,88\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><rect x=\"220\" y=\"88\" width=\"200\" height=\"64\" rx=\"14\" class=\"flow-box\"/><text x=\"320.0\" y=\"111.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">a ← 1</text><text x=\"320.0\" y=\"129.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">b ← 8</text><path d=\"M320,152 L320,188\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><polygon points=\"320,190.0 415.0,236 320,282.0 225.0,236\" class=\"flow-decision\"/><text x=\"320\" y=\"236\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">a < b ?</text><text x=\"430\" y=\"228\" class=\"flow-label\">はい</text><text x=\"220\" y=\"302\" class=\"flow-label\">いいえ</text><path d=\"M320,282 L320,320\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><rect x=\"220\" y=\"320\" width=\"200\" height=\"88\" rx=\"14\" class=\"flow-box\"/><text x=\"320.0\" y=\"355.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">a ← a + 2</text><text x=\"320.0\" y=\"373.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">b ← b - 1</text><path d=\"M420,364 L535,364 L535,236 L418,236\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><path d=\"M225,236 L130,236 L130,450 L250,450\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><rect x=\"250\" y=\"428\" width=\"140\" height=\"44\" rx=\"14\" class=\"flow-box\"/><text x=\"320.0\" y=\"450.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">a + bを表示</text><path d=\"M320,472 L320,500\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><rect x=\"260\" y=\"500\" width=\"120\" height=\"44\" rx=\"14\" class=\"flow-box\"/><text x=\"320.0\" y=\"522.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">終了</text></svg>",
+    "figureSvg": "<svg viewBox=\"0 0 650 560\" role=\"img\" aria-label=\"aとbを更新しながらa+bを表示するフローチャート\" class=\"flowchart-svg\"><defs><marker id=\"alg_fig_003_arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L0,6 L9,3 z\" class=\"flow-arrow-head\"/></marker></defs><rect x=\"260\" y=\"20\" width=\"120\" height=\"44\" rx=\"14\" class=\"flow-box\"/><text x=\"320.0\" y=\"42.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">開始</text><path d=\"M320,64 L320,88\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><rect x=\"220\" y=\"88\" width=\"200\" height=\"64\" rx=\"14\" class=\"flow-box\"/><text x=\"320.0\" y=\"111.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">a ← 1</text><text x=\"320.0\" y=\"129.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">b ← 8</text><path d=\"M320,152 L320,188\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><polygon points=\"320,190.0 415.0,236 320,282.0 225.0,236\" class=\"flow-decision\"/><text x=\"320\" y=\"236\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">a &lt; b ?</text><text x=\"430\" y=\"228\" class=\"flow-label\">はい</text><text x=\"220\" y=\"302\" class=\"flow-label\">いいえ</text><path d=\"M320,282 L320,320\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><rect x=\"220\" y=\"320\" width=\"200\" height=\"88\" rx=\"14\" class=\"flow-box\"/><text x=\"320.0\" y=\"355.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">a ← a + 2</text><text x=\"320.0\" y=\"373.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">b ← b - 1</text><path d=\"M420,364 L535,364 L535,236 L418,236\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><path d=\"M225,236 L130,236 L130,450 L250,450\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><rect x=\"250\" y=\"428\" width=\"140\" height=\"44\" rx=\"14\" class=\"flow-box\"/><text x=\"320.0\" y=\"450.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">a + bを表示</text><path d=\"M320,472 L320,500\" class=\"flow-line\" marker-end=\"url(#alg_fig_003_arrow)\"/><rect x=\"260\" y=\"500\" width=\"120\" height=\"44\" rx=\"14\" class=\"flow-box\"/><text x=\"320.0\" y=\"522.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"flow-text\">終了</text></svg>",
     "choices": [
       "9",
       "10",
@@ -5218,5 +5218,230 @@ const QUESTIONS = [
     ],
     "answer": 0,
     "explanation": "キャッシュメモリはCPUの近くに置かれる高速な記憶装置で、よく使う命令やデータを一時的に保持し、処理の待ち時間を減らす。"
+  },
+  {
+    "id": "add20260531_ui_001",
+    "category": "情報デザイン",
+    "difficulty": "standard",
+    "question": "ある学校が文化祭サイトを公開した。試験利用後のアンケート結果をまとめた。図の結果から優先的に改善すべき事項として最も適切なものはどれか。",
+    "choices": [
+      "ボタンの大きさ",
+      "情報の配置",
+      "操作説明",
+      "表示速度"
+    ],
+    "answer": 3,
+    "explanation": "他項目より表示速度への不満が大きい。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='500' height='180'><rect x='10' y='10' width='480' height='160' fill='white' stroke='black'/><text x='20' y='35'>利用者アンケート（100人）</text><text x='20' y='70'>情報が見つけやすい 85人</text><text x='20' y='95'>ボタンが押しやすい 78人</text><text x='20' y='120'>操作方法が分かりやすい 91人</text><text x='20' y='145'>読み込みが遅い 62人</text></svg>"
+  },
+  {
+    "id": "add20260531_ui_002",
+    "category": "情報デザイン",
+    "difficulty": "standard",
+    "question": "色覚バリアフリーの観点から最も適切な改善はどれか。",
+    "choices": [
+      "色を鮮やかにする",
+      "文字情報も併記する",
+      "凡例を削除する",
+      "色数を増やす"
+    ],
+    "answer": 1,
+    "explanation": "色だけに依存しない。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='450' height='120'><text x='10' y='30'>凡例</text><rect x='20' y='50' width='20' height='20' fill='red'/><text x='50' y='65'>開設中</text><rect x='150' y='50' width='20' height='20' fill='green'/><text x='180' y='65'>準備中</text><rect x='300' y='50' width='20' height='20' fill='blue'/><text x='330' y='65'>閉鎖中</text></svg>"
+  },
+  {
+    "id": "add20260531_ui_003",
+    "category": "情報デザイン",
+    "difficulty": "advanced",
+    "question": "学校サイトの改善前後で目的ページ到達率を調査した。最も考えられる改善内容はどれか。",
+    "choices": [
+      "不要なメニューを整理した",
+      "背景画像を増やした",
+      "アニメーションを追加した",
+      "文字を小さくした"
+    ],
+    "answer": 0,
+    "explanation": "目的ページへ到達しやすくなったため。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='300' height='180'><line x1='40' y1='20' x2='40' y2='150' stroke='black'/><line x1='40' y1='150' x2='260' y2='150' stroke='black'/><rect x='80' y='92' width='40' height='58' fill='gray'/><rect x='180' y='66' width='40' height='84' fill='gray'/><text x='75' y='170'>58%</text><text x='175' y='170'>84%</text><text x='60' y='30'>改善前</text><text x='160' y='30'>改善後</text></svg>"
+  },
+  {
+    "id": "add20260531_ct_001",
+    "category": "情報デザイン",
+    "difficulty": "standard",
+    "question": "次の画面A・Bは、同じ申込フォームの一部である。ユーザビリティの観点から、画面Bの改善点として最も適切なものはどれか。",
+    "choices": [
+      "入力項目が増え、利用者がより詳しい情報を入力できるようになった",
+      "必須項目が明示され、入力漏れを防ぎやすくなった",
+      "文字が小さくなり、一覧性が高まった",
+      "色の種類が増え、見た目が華やかになった"
+    ],
+    "answer": 1,
+    "explanation": "画面Bでは必須項目が分かるため、利用者は入力漏れを避けやすい。ユーザビリティでは、利用者が迷わず目的を達成できることが重要である。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='520' height='220' viewBox='0 0 520 220'>\n<rect x='10' y='10' width='230' height='190' fill='white' stroke='black'/>\n<text x='20' y='35' font-size='16'>画面A</text>\n<text x='25' y='70' font-size='14'>氏名</text><rect x='80' y='52' width='130' height='24' fill='none' stroke='black'/>\n<text x='25' y='110' font-size='14'>メール</text><rect x='80' y='92' width='130' height='24' fill='none' stroke='black'/>\n<text x='25' y='150' font-size='14'>電話番号</text><rect x='80' y='132' width='130' height='24' fill='none' stroke='black'/>\n<rect x='280' y='10' width='230' height='190' fill='white' stroke='black'/>\n<text x='290' y='35' font-size='16'>画面B</text>\n<text x='295' y='70' font-size='14'>氏名 ※必須</text><rect x='390' y='52' width='90' height='24' fill='none' stroke='black'/>\n<text x='295' y='110' font-size='14'>メール ※必須</text><rect x='390' y='92' width='90' height='24' fill='none' stroke='black'/>\n<text x='295' y='150' font-size='14'>電話番号</text><rect x='390' y='132' width='90' height='24' fill='none' stroke='black'/>\n</svg>"
+  },
+  {
+    "id": "add20260531_ct_002",
+    "category": "情報デザイン",
+    "difficulty": "advanced",
+    "question": "次の表は、学校サイトの改善案を利用者10人に試してもらった結果である。最も優先して採用すべき改善案はどれか。",
+    "choices": [
+      "A案：背景画像を増やす",
+      "B案：目的別メニューに整理する",
+      "C案：文字をすべて同じ大きさにする",
+      "D案：リンク色を毎回変える"
+    ],
+    "answer": 1,
+    "explanation": "目的ページ到達時間が短く、迷った人数も少ないB案が最も有効である。見た目の装飾よりも、目的の情報に到達しやすい設計が重要である。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='520' height='210' viewBox='0 0 520 210'>\n<rect x='10' y='10' width='500' height='180' fill='white' stroke='black'/>\n<text x='25' y='38' font-size='16'>改善案の比較</text>\n<line x1='20' y1='55' x2='500' y2='55' stroke='black'/>\n<line x1='20' y1='90' x2='500' y2='90' stroke='black'/>\n<line x1='20' y1='125' x2='500' y2='125' stroke='black'/>\n<line x1='20' y1='160' x2='500' y2='160' stroke='black'/>\n<line x1='110' y1='55' x2='110' y2='190' stroke='black'/>\n<line x1='300' y1='55' x2='300' y2='190' stroke='black'/>\n<text x='35' y='78' font-size='13'>案</text><text x='135' y='78' font-size='13'>平均到達時間</text><text x='325' y='78' font-size='13'>迷った人数</text>\n<text x='35' y='113' font-size='13'>A</text><text x='145' y='113' font-size='13'>95秒</text><text x='350' y='113' font-size='13'>6人</text>\n<text x='35' y='148' font-size='13'>B</text><text x='145' y='148' font-size='13'>42秒</text><text x='350' y='148' font-size='13'>1人</text>\n<text x='35' y='183' font-size='13'>C</text><text x='145' y='183' font-size='13'>80秒</text><text x='350' y='183' font-size='13'>4人</text>\n</svg>"
+  },
+  {
+    "id": "add20260531_ct_003",
+    "category": "データ活用",
+    "difficulty": "advanced",
+    "question": "次の散布図は、あるクラスの学習時間と確認テスト得点の関係を示したものである。読み取りとして最も適切なものはどれか。",
+    "choices": [
+      "学習時間が長いほど得点が高くなる傾向があるが、必ず高得点になるとは限らない",
+      "学習時間と得点にはまったく関係がない",
+      "学習時間が長いほど得点は必ず下がる",
+      "この図だけで、学習時間が得点上昇の唯一の原因だと断定できる"
+    ],
+    "answer": 0,
+    "explanation": "散布図は右上がりの傾向を示しているため正の相関が読み取れる。ただし、相関があることと因果関係を断定することは別である。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='420' height='280' viewBox='0 0 420 280'>\n<rect x='10' y='10' width='390' height='250' fill='white' stroke='none'/>\n<line x1='55' y1='220' x2='360' y2='220' stroke='black'/>\n<line x1='55' y1='220' x2='55' y2='35' stroke='black'/>\n<text x='170' y='255' font-size='14'>学習時間</text><text x='10' y='35' font-size='14'>得点</text>\n<circle cx='80' cy='190' r='4'/><circle cx='95' cy='180' r='4'/><circle cx='120' cy='175' r='4'/><circle cx='135' cy='160' r='4'/>\n<circle cx='150' cy='150' r='4'/><circle cx='165' cy='165' r='4'/><circle cx='180' cy='135' r='4'/><circle cx='195' cy='128' r='4'/>\n<circle cx='210' cy='118' r='4'/><circle cx='230' cy='112' r='4'/><circle cx='245' cy='100' r='4'/><circle cx='260' cy='95' r='4'/>\n<circle cx='280' cy='82' r='4'/><circle cx='300' cy='75' r='4'/><circle cx='320' cy='62' r='4'/>\n<line x1='70' y1='195' x2='330' y2='60' stroke='gray' stroke-dasharray='5 4'/>\n</svg>"
+  },
+  {
+    "id": "add20260531_ct_004",
+    "category": "データ活用",
+    "difficulty": "standard",
+    "question": "次の表は、あるアンケート結果を示している。割合を比較して説明する場合、最も適切な記述はどれか。",
+    "choices": [
+      "回答数だけを見るとAが最も多いため、割合もAが最も高い",
+      "AとBは回答数が同じなので、割合も同じである",
+      "全体人数が異なるため、回答数だけでなく割合で比較する必要がある",
+      "人数が多い集団は、割合を計算してはいけない"
+    ],
+    "answer": 2,
+    "explanation": "母数が異なる集団を比較するときは、単純な人数だけでは誤解を招くことがある。割合に直して比較することが大切である。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='480' height='190' viewBox='0 0 480 190'>\n<rect x='20' y='20' width='430' height='140' fill='white' stroke='black'/>\n<line x1='20' y1='55' x2='450' y2='55' stroke='black'/>\n<line x1='20' y1='90' x2='450' y2='90' stroke='black'/>\n<line x1='20' y1='125' x2='450' y2='125' stroke='black'/>\n<line x1='130' y1='20' x2='130' y2='160' stroke='black'/>\n<line x1='280' y1='20' x2='280' y2='160' stroke='black'/>\n<text x='50' y='43' font-size='14'>集団</text><text x='160' y='43' font-size='14'>全体人数</text><text x='315' y='43' font-size='14'>「はい」の人数</text>\n<text x='55' y='78' font-size='14'>A</text><text x='175' y='78' font-size='14'>40人</text><text x='335' y='78' font-size='14'>20人</text>\n<text x='55' y='113' font-size='14'>B</text><text x='175' y='113' font-size='14'>80人</text><text x='335' y='113' font-size='14'>20人</text>\n<text x='55' y='148' font-size='14'>C</text><text x='175' y='148' font-size='14'>100人</text><text x='335' y='148' font-size='14'>30人</text>\n</svg>"
+  },
+  {
+    "id": "add20260531_ct_005",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "standard",
+    "question": "次の図は、Webページを閲覧するときの通信の流れを簡略化したものである。Aで行われる処理として最も適切なものはどれか。",
+    "choices": [
+      "ドメイン名に対応するIPアドレスを調べる",
+      "HTMLを画面に描画する",
+      "画像を圧縮して保存する",
+      "パスワードを必ず暗号化して保管する"
+    ],
+    "answer": 0,
+    "explanation": "URLに含まれるドメイン名から通信先のIPアドレスを調べる処理はDNSによる名前解決である。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='560' height='180' viewBox='0 0 560 180'>\n<rect x='25' y='60' width='100' height='50' fill='white' stroke='black'/><text x='45' y='90' font-size='14'>ブラウザ</text>\n<rect x='215' y='30' width='120' height='50' fill='white' stroke='black'/><text x='235' y='60' font-size='14'>DNSサーバ</text>\n<rect x='420' y='60' width='110' height='50' fill='white' stroke='black'/><text x='440' y='90' font-size='14'>Webサーバ</text>\n<line x1='125' y1='75' x2='215' y2='55' stroke='black' marker-end='url(#a)'/>\n<line x1='335' y1='55' x2='420' y2='75' stroke='black' marker-end='url(#a)'/>\n<line x1='125' y1='105' x2='420' y2='105' stroke='black' marker-end='url(#a)'/>\n<text x='155' y='50' font-size='14'>A</text><text x='260' y='125' font-size='14'>ページ要求</text>\n<defs><marker id='a' markerWidth='10' markerHeight='10' refX='8' refY='3' orient='auto'><path d='M0,0 L0,6 L9,3 z' fill='black'/></marker></defs>\n</svg>"
+  },
+  {
+    "id": "add20260531_ct_006",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "question": "次のようなログイン画面を作る。セキュリティとユーザビリティの両方を考えた改善として最も適切なものはどれか。",
+    "choices": [
+      "パスワード欄の入力文字を常にそのまま表示する",
+      "パスワードを表示するかどうかを利用者が切り替えられるようにする",
+      "入力ミスを防ぐため、パスワード欄をなくす",
+      "全員が同じ初期パスワードを使うようにする"
+    ],
+    "answer": 1,
+    "explanation": "パスワードを一時的に表示できる切替機能は、入力ミスを減らしつつ、必要なときだけ表示できるため、使いやすさと安全性のバランスを取りやすい。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='420' height='210' viewBox='0 0 420 210'>\n<rect x='60' y='25' width='300' height='160' fill='white' stroke='black'/>\n<text x='130' y='55' font-size='18'>ログイン</text>\n<text x='90' y='90' font-size='14'>ID</text><rect x='150' y='72' width='160' height='25' fill='none' stroke='black'/>\n<text x='90' y='130' font-size='14'>PW</text><rect x='150' y='112' width='160' height='25' fill='none' stroke='black'/>\n<text x='160' y='130' font-size='18'>••••••••</text>\n<rect x='315' y='112' width='25' height='25' fill='white' stroke='black'/><text x='321' y='130' font-size='12'>目</text>\n<rect x='150' y='150' width='90' height='25' fill='white' stroke='black'/><text x='170' y='168' font-size='13'>送信</text>\n</svg>"
+  },
+  {
+    "id": "add20260531_ct_007",
+    "category": "プログラミング",
+    "difficulty": "standard",
+    "question": "次のフローチャートは、変数xの値によって表示を変える処理である。x=7のとき表示されるものはどれか。",
+    "choices": [
+      "A",
+      "B",
+      "C",
+      "何も表示されない"
+    ],
+    "answer": 1,
+    "explanation": "x=7は「x<5」を満たさないが、「x<10」を満たすため、表示されるのはBである。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='360' height='360' viewBox='0 0 360 360'>\n<rect x='130' y='15' width='100' height='35' rx='15' fill='white' stroke='black'/><text x='165' y='38' font-size='14'>開始</text>\n<polygon points='180,75 245,115 180,155 115,115' fill='white' stroke='black'/><text x='158' y='120' font-size='14'>x&lt;5?</text>\n<polygon points='180,185 245,225 180,265 115,225' fill='white' stroke='black'/><text x='155' y='230' font-size='14'>x&lt;10?</text>\n<rect x='35' y='100' width='55' height='30' fill='white' stroke='black'/><text x='55' y='120' font-size='14'>A</text>\n<rect x='35' y='210' width='55' height='30' fill='white' stroke='black'/><text x='55' y='230' font-size='14'>B</text>\n<rect x='270' y='210' width='55' height='30' fill='white' stroke='black'/><text x='290' y='230' font-size='14'>C</text>\n<line x1='180' y1='50' x2='180' y2='75' stroke='black'/>\n<line x1='115' y1='115' x2='90' y2='115' stroke='black'/><text x='100' y='105' font-size='12'>はい</text>\n<line x1='180' y1='155' x2='180' y2='185' stroke='black'/><text x='188' y='175' font-size='12'>いいえ</text>\n<line x1='115' y1='225' x2='90' y2='225' stroke='black'/><text x='100' y='215' font-size='12'>はい</text>\n<line x1='245' y1='225' x2='270' y2='225' stroke='black'/><text x='250' y='215' font-size='12'>いいえ</text>\n</svg>"
+  },
+  {
+    "id": "add20260531_ct_008",
+    "category": "プログラミング",
+    "difficulty": "advanced",
+    "question": "次の擬似コードを実行したとき、最後に表示される値はどれか。",
+    "choices": [
+      "6",
+      "10",
+      "12",
+      "15"
+    ],
+    "answer": 1,
+    "explanation": "iが1から4まで変化し、sに1,2,3,4を順に加えるので、s=1+2+3+4=10となる。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='390' height='190' viewBox='0 0 390 190'>\n<rect x='20' y='20' width='340' height='140' fill='white' stroke='black'/>\n<text x='45' y='55' font-size='15' font-family='monospace'>s ← 0</text>\n<text x='45' y='82' font-size='15' font-family='monospace'>i を 1 から 4 まで 1 ずつ増やす</text>\n<text x='70' y='109' font-size='15' font-family='monospace'>s ← s + i</text>\n<text x='45' y='136' font-size='15' font-family='monospace'>s を表示する</text>\n</svg>"
+  },
+  {
+    "id": "add20260531_ct_009",
+    "category": "コンピュータの仕組み",
+    "difficulty": "standard",
+    "question": "次の図は、画像の一部を2値で表したものである。ランレングス圧縮で左上から行ごとに読むとき、最初の行の表し方として最も適切なものはどれか。ただし、白を0、黒を1とする。",
+    "choices": [
+      "0が3個、1が2個、0が1個",
+      "1が3個、0が2個、1が1個",
+      "0が2個、1が3個、0が1個",
+      "0が1個、1が2個、0が3個"
+    ],
+    "answer": 0,
+    "explanation": "最初の行は、左から白白白黒黒白である。白を0、黒を1とすると、0が3個、1が2個、0が1個となる。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='260' height='210' viewBox='0 0 260 210'>\n<text x='20' y='25' font-size='14'>白=0、黒=1</text>\n<g transform='translate(40,45)'>\n<rect x='0' y='0' width='30' height='30' fill='white' stroke='black'/><rect x='30' y='0' width='30' height='30' fill='white' stroke='black'/><rect x='60' y='0' width='30' height='30' fill='white' stroke='black'/><rect x='90' y='0' width='30' height='30' fill='black' stroke='black'/><rect x='120' y='0' width='30' height='30' fill='black' stroke='black'/><rect x='150' y='0' width='30' height='30' fill='white' stroke='black'/>\n<rect x='0' y='30' width='30' height='30' fill='white' stroke='black'/><rect x='30' y='30' width='30' height='30' fill='black' stroke='black'/><rect x='60' y='30' width='30' height='30' fill='black' stroke='black'/><rect x='90' y='30' width='30' height='30' fill='black' stroke='black'/><rect x='120' y='30' width='30' height='30' fill='white' stroke='black'/><rect x='150' y='30' width='30' height='30' fill='white' stroke='black'/>\n<rect x='0' y='60' width='30' height='30' fill='white' stroke='black'/><rect x='30' y='60' width='30' height='30' fill='white' stroke='black'/><rect x='60' y='60' width='30' height='30' fill='black' stroke='black'/><rect x='90' y='60' width='30' height='30' fill='white' stroke='black'/><rect x='120' y='60' width='30' height='30' fill='white' stroke='black'/><rect x='150' y='60' width='30' height='30' fill='black' stroke='black'/>\n</g>\n</svg>"
+  },
+  {
+    "id": "add20260531_ct_010",
+    "category": "情報社会と法",
+    "difficulty": "advanced",
+    "question": "次の表は、生成AIを使って作成した発表資料についての確認結果である。発表前の対応として最も適切なものはどれか。",
+    "choices": [
+      "出典が不明な数値や画像を確認し、必要なら差し替える",
+      "生成AIが出力したため、内容はすべて正しいと判断する",
+      "見た目が整っていれば、根拠の確認は不要である",
+      "引用元が不明でも、授業内発表なら自由に使える"
+    ],
+    "answer": 0,
+    "explanation": "生成AIの出力には誤りや出典不明の情報が含まれることがある。発表に使う前に、根拠や権利関係を確認する必要がある。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='500' height='200' viewBox='0 0 500 200'>\n<rect x='20' y='20' width='450' height='150' fill='white' stroke='black'/>\n<line x1='20' y1='55' x2='470' y2='55' stroke='black'/>\n<line x1='20' y1='90' x2='470' y2='90' stroke='black'/>\n<line x1='20' y1='125' x2='470' y2='125' stroke='black'/>\n<line x1='260' y1='20' x2='260' y2='170' stroke='black'/>\n<text x='40' y='43' font-size='14'>確認項目</text><text x='315' y='43' font-size='14'>結果</text>\n<text x='40' y='78' font-size='14'>統計数値の出典</text><text x='320' y='78' font-size='14'>不明</text>\n<text x='40' y='113' font-size='14'>画像の利用条件</text><text x='320' y='113' font-size='14'>不明</text>\n<text x='40' y='148' font-size='14'>文章の誤字</text><text x='320' y='148' font-size='14'>なし</text>\n</svg>"
+  },
+  {
+    "id": "add20260531_ct_011",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "question": "次の表は、ある学校のWebサービスで発生した事象と対策案である。対策として最も適切な組合せはどれか。",
+    "choices": [
+      "A：パスワードを短くする、B：全員で同じIDを使う",
+      "A：二要素認証を導入する、B：アクセス権限を見直す",
+      "A：通信をHTTPにする、B：全データを公開する",
+      "A：ログを削除する、B：バックアップを取らない"
+    ],
+    "answer": 1,
+    "explanation": "不正ログイン対策として二要素認証は有効である。また、閲覧してはいけない情報が見える場合は、アクセス権限の設定を見直す必要がある。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='520' height='190' viewBox='0 0 520 190'>\n<rect x='20' y='20' width='470' height='130' fill='white' stroke='black'/>\n<line x1='20' y1='55' x2='490' y2='55' stroke='black'/>\n<line x1='20' y1='95' x2='490' y2='95' stroke='black'/>\n<line x1='90' y1='20' x2='90' y2='150' stroke='black'/>\n<line x1='310' y1='20' x2='310' y2='150' stroke='black'/>\n<text x='40' y='43' font-size='14'>事象</text><text x='155' y='43' font-size='14'>内容</text><text x='350' y='43' font-size='14'>主な対策</text>\n<text x='42' y='80' font-size='14'>A</text><text x='105' y='80' font-size='14'>なりすましログイン</text><text x='330' y='80' font-size='14'>？</text>\n<text x='42' y='125' font-size='14'>B</text><text x='105' y='125' font-size='14'>他クラスの成績が見える</text><text x='330' y='125' font-size='14'>？</text>\n</svg>"
+  },
+  {
+    "id": "add20260531_ct_012",
+    "category": "コンピュータの仕組み",
+    "difficulty": "standard",
+    "question": "次の表は、音声をデジタル化するときの設定である。データ量を小さくする方法として最も適切なものはどれか。ただし、圧縮は考えない。",
+    "choices": [
+      "標本化周波数を下げる、または量子化ビット数を減らす",
+      "標本化周波数と量子化ビット数をどちらも増やす",
+      "チャンネル数を増やす",
+      "録音時間を長くする"
+    ],
+    "answer": 0,
+    "explanation": "音声データ量は、標本化周波数、量子化ビット数、チャンネル数、時間に比例する。これらを減らすとデータ量は小さくなるが、音質が下がる場合がある。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' width='520' height='180' viewBox='0 0 520 180'>\n<rect x='20' y='20' width='470' height='120' fill='white' stroke='black'/>\n<line x1='20' y1='55' x2='490' y2='55' stroke='black'/>\n<line x1='20' y1='95' x2='490' y2='95' stroke='black'/>\n<line x1='180' y1='20' x2='180' y2='140' stroke='black'/>\n<line x1='330' y1='20' x2='330' y2='140' stroke='black'/>\n<text x='55' y='43' font-size='14'>設定</text><text x='210' y='43' font-size='14'>現在</text><text x='365' y='43' font-size='14'>変更案</text>\n<text x='45' y='80' font-size='14'>標本化周波数</text><text x='215' y='80' font-size='14'>44.1kHz</text><text x='365' y='80' font-size='14'>22.05kHz</text>\n<text x='45' y='120' font-size='14'>量子化ビット数</text><text x='215' y='120' font-size='14'>16ビット</text><text x='365' y='120' font-size='14'>8ビット</text>\n</svg>"
   }
 ];
