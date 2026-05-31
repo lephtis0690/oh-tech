@@ -5015,5 +5015,208 @@
     ],
     "answer": 2,
     "explanation": "iが1から5までの間、sumにiを足す。1+2+3+4+5=15なので、最後に表示される値は15である。"
+  },
+  {
+    "id": "add20260531_design_fig_002",
+    "category": "情報デザイン",
+    "difficulty": "standard",
+    "question": "図の入力フォームを改善する方針として、最も適切なものはどれか。",
+    "figureSvg": "<svg viewBox=\"0 0 560 300\" role=\"img\" aria-label=\"名前とメールアドレスの入力欄が並ぶフォーム画面\"><rect x=\"40\" y=\"35\" width=\"480\" height=\"220\" rx=\"18\" fill=\"#ffffff\" stroke=\"#94a3b8\" stroke-width=\"2\"/><text x=\"70\" y=\"75\" class=\"label\">参加申込フォーム</text><text x=\"70\" y=\"115\" class=\"caption\">名前</text><rect x=\"185\" y=\"95\" width=\"250\" height=\"34\" rx=\"6\" fill=\"#f8fafc\" stroke=\"#94a3b8\"/><text x=\"70\" y=\"165\" class=\"caption\">メール</text><rect x=\"185\" y=\"145\" width=\"250\" height=\"34\" rx=\"6\" fill=\"#f8fafc\" stroke=\"#94a3b8\"/><text x=\"70\" y=\"215\" class=\"caption\">電話番号</text><rect x=\"185\" y=\"195\" width=\"250\" height=\"34\" rx=\"6\" fill=\"#f8fafc\" stroke=\"#94a3b8\"/><rect x=\"435\" y=\"95\" width=\"60\" height=\"34\" rx=\"6\" fill=\"#fee2e2\" stroke=\"#dc2626\"/><text x=\"465\" y=\"117\" text-anchor=\"middle\" class=\"caption\">必須</text><rect x=\"435\" y=\"145\" width=\"60\" height=\"34\" rx=\"6\" fill=\"#fee2e2\" stroke=\"#dc2626\"/><text x=\"465\" y=\"167\" text-anchor=\"middle\" class=\"caption\">必須</text><rect x=\"240\" y=\"248\" width=\"110\" height=\"34\" rx=\"17\" fill=\"#dbeafe\" stroke=\"#2563eb\"/><text x=\"295\" y=\"270\" text-anchor=\"middle\" class=\"caption\">送信</text></svg>",
+    "choices": [
+      "必須項目を色だけで示すのではなく、文字や説明も併用する",
+      "入力欄をすべて同じ名前にして、利用者が迷わないようにする",
+      "送信ボタンを画面外に置き、誤送信を防ぐ",
+      "必須項目の表示をなくし、入力後にだけエラーを出す"
+    ],
+    "answer": 0,
+    "explanation": "色だけに頼ると、色の見え方や画面環境によって伝わりにくい。文字やラベルを併用すると、誰にとっても意味が分かりやすくなる。"
+  },
+  {
+    "id": "add20260531_design_fig_003",
+    "category": "情報デザイン",
+    "difficulty": "advanced",
+    "question": "図の画面設計について、情報の階層を分かりやすくする改善として最も適切なものはどれか。",
+    "figureSvg": "<svg viewBox=\"0 0 560 300\" role=\"img\" aria-label=\"見出しと本文とボタンが同じ大きさで並ぶ画面\"><rect x=\"45\" y=\"35\" width=\"470\" height=\"230\" rx=\"18\" fill=\"#fff\" stroke=\"#94a3b8\" stroke-width=\"2\"/><text x=\"75\" y=\"78\" class=\"caption\">学習サマリー</text><text x=\"75\" y=\"115\" class=\"caption\">今日の正答率  ８０％</text><text x=\"75\" y=\"152\" class=\"caption\">苦手分野  ネットワーク</text><text x=\"75\" y=\"189\" class=\"caption\">次に取り組む問題</text><rect x=\"75\" y=\"210\" width=\"150\" height=\"34\" rx=\"17\" fill=\"#dbeafe\" stroke=\"#2563eb\"/><text x=\"150\" y=\"232\" text-anchor=\"middle\" class=\"caption\">開始する</text><text x=\"305\" y=\"232\" class=\"caption\">履歴を見る</text></svg>",
+    "choices": [
+      "見出し、重要な数値、操作ボタンの大きさや余白に差をつける",
+      "すべての文字を同じ大きさにして公平に見せる",
+      "ボタンと本文を同じ見た目にして統一感だけを優先する",
+      "重要な情報を画面の端に小さく置く"
+    ],
+    "answer": 0,
+    "explanation": "情報デザインでは、重要度に応じて文字サイズ、余白、配置、ボタンの見た目に差をつけると、利用者が次に見る場所や操作を判断しやすくなる。"
+  },
+  {
+    "id": "add20260531_design_004",
+    "category": "情報デザイン",
+    "difficulty": "standard",
+    "question": "スマートフォンでも使う学習サイトを設計するとき、操作ミスを減らす工夫として最も適切なものはどれか。",
+    "choices": [
+      "タップするボタンの間隔を十分に空け、文字も読みやすい大きさにする",
+      "画面に入る情報量を増やすため、文字とボタンをできるだけ小さくする",
+      "重要なボタンほど背景と同じ色にして目立たなくする",
+      "横スクロールを前提にして、表をそのまま広く表示する"
+    ],
+    "answer": 0,
+    "explanation": "スマートフォンでは指で操作するため、ボタンの大きさや間隔が重要である。読みやすさと押しやすさを確保することが、操作ミスの減少につながる。"
+  },
+  {
+    "id": "add20260531_design_005",
+    "category": "情報デザイン",
+    "difficulty": "advanced",
+    "question": "同じ情報を表とグラフのどちらで示すかを判断する考え方として、最も適切なものはどれか。",
+    "choices": [
+      "細かな数値を正確に比較したい場合は表、全体の傾向をつかませたい場合はグラフが向いている",
+      "どのような目的でもグラフだけを使えば、必ず正確に伝わる",
+      "表は見た目が単純なので、数値を扱う場面では使わない",
+      "グラフにすれば、元データの単位や範囲を示す必要はない"
+    ],
+    "answer": 0,
+    "explanation": "表は正確な値を確認しやすく、グラフは増減や割合などの傾向を把握しやすい。伝えたい目的に応じて表現を選ぶことが大切である。"
+  },
+  {
+    "id": "add20260531_prog_fig_002",
+    "category": "プログラミング",
+    "difficulty": "standard",
+    "question": "図のフローチャートを実行したとき、最後に表示される値はどれか。",
+    "figureSvg": "<svg viewBox=\"0 0 520 420\" role=\"img\" aria-label=\"合計を求めるフローチャート\" class=\"flowchart-svg\"><defs><marker id=\"arrow2\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L0,6 L9,3 z\" class=\"flow-arrow-head\"/></marker></defs><rect x=\"170\" y=\"18\" width=\"180\" height=\"40\" rx=\"12\" class=\"flow-box\"/><text x=\"260\" y=\"44\" text-anchor=\"middle\" class=\"flow-text\">開始</text><line x1=\"260\" y1=\"58\" x2=\"260\" y2=\"80\" class=\"flow-line\" marker-end=\"url(#arrow2)\"/><rect x=\"150\" y=\"86\" width=\"220\" height=\"42\" rx=\"10\" class=\"flow-box\"/><text x=\"260\" y=\"113\" text-anchor=\"middle\" class=\"flow-text\">i←1, sum←0</text><line x1=\"260\" y1=\"128\" x2=\"260\" y2=\"154\" class=\"flow-line\" marker-end=\"url(#arrow2)\"/><polygon points=\"260,158 360,210 260,262 160,210\" class=\"flow-decision\"/><text x=\"260\" y=\"206\" text-anchor=\"middle\" class=\"flow-text\">i≦4?</text><text x=\"260\" y=\"225\" text-anchor=\"middle\" class=\"flow-text\"> </text><line x1=\"260\" y1=\"262\" x2=\"260\" y2=\"284\" class=\"flow-line\" marker-end=\"url(#arrow2)\"/><text x=\"283\" y=\"277\" class=\"flow-label\">はい</text><rect x=\"150\" y=\"290\" width=\"220\" height=\"42\" rx=\"10\" class=\"flow-box\"/><text x=\"260\" y=\"317\" text-anchor=\"middle\" class=\"flow-text\">sum←sum+i, i←i+1</text><path d=\"M150 311 H105 V210 H158\" class=\"flow-line\" marker-end=\"url(#arrow2)\"/><line x1=\"360\" y1=\"210\" x2=\"425\" y2=\"210\" class=\"flow-line\" marker-end=\"url(#arrow2)\"/><text x=\"380\" y=\"198\" class=\"flow-label\">いいえ</text><rect x=\"425\" y=\"188\" width=\"75\" height=\"44\" rx=\"10\" class=\"flow-box\"/><text x=\"462\" y=\"216\" text-anchor=\"middle\" class=\"flow-text\">表示</text><line x1=\"462\" y1=\"232\" x2=\"462\" y2=\"260\" class=\"flow-line\" marker-end=\"url(#arrow2)\"/><rect x=\"425\" y=\"266\" width=\"75\" height=\"40\" rx=\"12\" class=\"flow-box\"/><text x=\"462\" y=\"292\" text-anchor=\"middle\" class=\"flow-text\">終了</text></svg>",
+    "choices": [
+      "4",
+      "6",
+      "10",
+      "15"
+    ],
+    "answer": 2,
+    "explanation": "iが1,2,3,4の間だけsumに加えられる。合計は1+2+3+4=10なので、最後に表示される値は10である。"
+  },
+  {
+    "id": "add20260531_prog_fig_003",
+    "category": "プログラミング",
+    "difficulty": "advanced",
+    "question": "図の処理で、xに7を入力した場合の出力として正しいものはどれか。",
+    "figureSvg": "<svg viewBox=\"0 0 520 390\" role=\"img\" aria-label=\"条件分岐を含むフローチャート\" class=\"flowchart-svg\"><defs><marker id=\"arrow3\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L0,6 L9,3 z\" class=\"flow-arrow-head\"/></marker></defs><rect x=\"170\" y=\"18\" width=\"180\" height=\"40\" rx=\"12\" class=\"flow-box\"/><text x=\"260\" y=\"44\" text-anchor=\"middle\" class=\"flow-text\">開始</text><line x1=\"260\" y1=\"58\" x2=\"260\" y2=\"82\" class=\"flow-line\" marker-end=\"url(#arrow3)\"/><rect x=\"170\" y=\"88\" width=\"180\" height=\"42\" rx=\"10\" class=\"flow-box\"/><text x=\"260\" y=\"115\" text-anchor=\"middle\" class=\"flow-text\">xを入力</text><line x1=\"260\" y1=\"130\" x2=\"260\" y2=\"154\" class=\"flow-line\" marker-end=\"url(#arrow3)\"/><polygon points=\"260,158 365,215 260,272 155,215\" class=\"flow-decision\"/><text x=\"260\" y=\"212\" text-anchor=\"middle\" class=\"flow-text\">x mod 3 = 1?</text><line x1=\"155\" y1=\"215\" x2=\"90\" y2=\"215\" class=\"flow-line\" marker-end=\"url(#arrow3)\"/><text x=\"112\" y=\"200\" class=\"flow-label\">はい</text><rect x=\"35\" y=\"193\" width=\"55\" height=\"44\" rx=\"10\" class=\"flow-box\"/><text x=\"62\" y=\"221\" text-anchor=\"middle\" class=\"flow-text\">A</text><line x1=\"365\" y1=\"215\" x2=\"435\" y2=\"215\" class=\"flow-line\" marker-end=\"url(#arrow3)\"/><text x=\"385\" y=\"200\" class=\"flow-label\">いいえ</text><rect x=\"435\" y=\"193\" width=\"55\" height=\"44\" rx=\"10\" class=\"flow-box\"/><text x=\"462\" y=\"221\" text-anchor=\"middle\" class=\"flow-text\">B</text><line x1=\"62\" y1=\"237\" x2=\"62\" y2=\"300\" class=\"flow-line\"/><line x1=\"462\" y1=\"237\" x2=\"462\" y2=\"300\" class=\"flow-line\"/><line x1=\"62\" y1=\"300\" x2=\"260\" y2=\"300\" class=\"flow-line\"/><line x1=\"462\" y1=\"300\" x2=\"260\" y2=\"300\" class=\"flow-line\" marker-end=\"url(#arrow3)\"/><rect x=\"170\" y=\"306\" width=\"180\" height=\"40\" rx=\"12\" class=\"flow-box\"/><text x=\"260\" y=\"332\" text-anchor=\"middle\" class=\"flow-text\">終了</text></svg>",
+    "choices": [
+      "A",
+      "B",
+      "AとBの両方",
+      "何も表示されない"
+    ],
+    "answer": 0,
+    "explanation": "7を3で割った余りは1である。条件「x mod 3 = 1?」が真になるため、「はい」の枝に進み、Aが出力される。"
+  },
+  {
+    "id": "add20260531_prog_004",
+    "category": "プログラミング",
+    "difficulty": "standard",
+    "question": "配列 scores = [72, 85, 64, 90] から85以上の要素だけを数える処理で、必要な考え方として最も適切なものはどれか。",
+    "choices": [
+      "各要素を順に取り出し、条件を満たすときだけカウンタを1増やす",
+      "最初の要素だけを見て、配列全体の個数を決める",
+      "配列の要素数をそのまま85以上の個数とする",
+      "条件判定をせず、すべての値を合計する"
+    ],
+    "answer": 0,
+    "explanation": "条件に合う要素の個数を数えるには、反復処理で各要素を確認し、条件を満たした場合だけカウンタを増やす。"
+  },
+  {
+    "id": "add20260531_prog_005",
+    "category": "プログラミング",
+    "difficulty": "advanced",
+    "question": "変数 total を反復処理の前に0で初期化する理由として、最も適切なものはどれか。",
+    "choices": [
+      "以前の値や未定義の値が計算に混ざることを防ぐため",
+      "反復処理の回数を必ず0回にするため",
+      "すべての計算結果を文字列に変換するため",
+      "条件分岐を使えないようにするため"
+    ],
+    "answer": 0,
+    "explanation": "合計を求める変数は、処理前に0で初期化しておく必要がある。初期化しないと、意図しない値が加算され、正しい結果にならない可能性がある。"
+  },
+  {
+    "id": "add20260531_data_fig_002",
+    "category": "データ活用",
+    "difficulty": "advanced",
+    "question": "図の散布図について、最も適切な読み取りはどれか。",
+    "figureSvg": "<svg viewBox=\"0 0 520 330\" role=\"img\" aria-label=\"弱い正の相関を示す散布図\"><text x=\"260\" y=\"24\" text-anchor=\"middle\" class=\"label\">学習時間と小テスト得点</text><line x1=\"70\" y1=\"270\" x2=\"470\" y2=\"270\" class=\"axis\"/><line x1=\"70\" y1=\"40\" x2=\"70\" y2=\"270\" class=\"axis\"/><text x=\"270\" y=\"315\" text-anchor=\"middle\" class=\"label\">学習時間</text><text x=\"22\" y=\"155\" transform=\"rotate(-90 22 155)\" text-anchor=\"middle\" class=\"label\">得点</text><line x1=\"70\" y1=\"220\" x2=\"470\" y2=\"150\" class=\"line\"/><circle cx=\"90\" cy=\"245\" r=\"5\" class=\"point\"/><circle cx=\"125\" cy=\"210\" r=\"5\" class=\"point\"/><circle cx=\"160\" cy=\"238\" r=\"5\" class=\"point\"/><circle cx=\"195\" cy=\"190\" r=\"5\" class=\"point\"/><circle cx=\"230\" cy=\"215\" r=\"5\" class=\"point\"/><circle cx=\"265\" cy=\"172\" r=\"5\" class=\"point\"/><circle cx=\"300\" cy=\"198\" r=\"5\" class=\"point\"/><circle cx=\"335\" cy=\"158\" r=\"5\" class=\"point\"/><circle cx=\"370\" cy=\"180\" r=\"5\" class=\"point\"/><circle cx=\"405\" cy=\"132\" r=\"5\" class=\"point\"/><circle cx=\"440\" cy=\"170\" r=\"5\" class=\"point\"/></svg>",
+    "choices": [
+      "全体として正の相関が見られるが、点のばらつきもある",
+      "完全な正比例なので、学習時間から得点を必ず正確に予測できる",
+      "負の相関があるため、学習時間が増えるほど得点は下がる",
+      "相関があるので、学習時間以外の要因は存在しない"
+    ],
+    "answer": 0,
+    "explanation": "右上がりの傾向があるため正の相関は見られるが、点は直線上に完全には並んでいない。相関は因果関係の証明ではなく、他の要因も考えられる。"
+  },
+  {
+    "id": "add20260531_data_003",
+    "category": "データ活用",
+    "difficulty": "standard",
+    "question": "平均値だけでデータを判断すると危険な場合として、最も適切なものはどれか。",
+    "choices": [
+      "極端に大きい値や小さい値があり、代表値として平均が実態からずれる場合",
+      "すべての値が同じで、ばらつきがまったくない場合",
+      "データの個数が1個だけで、他の値が存在しない場合",
+      "単位がすべて同じで、入力ミスもない場合"
+    ],
+    "answer": 0,
+    "explanation": "平均値は外れ値の影響を受けやすい。極端な値がある場合は、中央値や箱ひげ図なども併せて確認するとよい。"
+  },
+  {
+    "id": "add20260531_network_fig_002",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "standard",
+    "question": "図のネットワークで、PC AがWebサイトを見るときに、名前解決を担当するものはどれか。",
+    "figureSvg": "<svg viewBox=\"0 0 560 300\" role=\"img\" aria-label=\"PC、ルータ、DNSサーバ、Webサーバのネットワーク図\"><rect x=\"40\" y=\"115\" width=\"90\" height=\"50\" rx=\"8\" fill=\"#dbeafe\" stroke=\"#2563eb\"/><text x=\"85\" y=\"145\" text-anchor=\"middle\" class=\"caption\">PC A</text><rect x=\"205\" y=\"115\" width=\"90\" height=\"50\" rx=\"8\" fill=\"#fef3c7\" stroke=\"#d97706\"/><text x=\"250\" y=\"145\" text-anchor=\"middle\" class=\"caption\">ルータ</text><rect x=\"380\" y=\"50\" width=\"110\" height=\"50\" rx=\"8\" fill=\"#dcfce7\" stroke=\"#16a34a\"/><text x=\"435\" y=\"80\" text-anchor=\"middle\" class=\"caption\">DNSサーバ</text><rect x=\"380\" y=\"190\" width=\"110\" height=\"50\" rx=\"8\" fill=\"#e0e7ff\" stroke=\"#4f46e5\"/><text x=\"435\" y=\"220\" text-anchor=\"middle\" class=\"caption\">Webサーバ</text><line x1=\"130\" y1=\"140\" x2=\"205\" y2=\"140\" class=\"line\"/><line x1=\"295\" y1=\"140\" x2=\"380\" y2=\"75\" class=\"line\"/><line x1=\"295\" y1=\"140\" x2=\"380\" y2=\"215\" class=\"line\"/><text x=\"330\" y=\"95\" class=\"caption\">名前→IP</text><text x=\"330\" y=\"202\" class=\"caption\">HTTP通信</text></svg>",
+    "choices": [
+      "DNSサーバ",
+      "Webサーバ",
+      "PC Aのディスプレイ",
+      "LANケーブルそのもの"
+    ],
+    "answer": 0,
+    "explanation": "DNSサーバは、ドメイン名をIPアドレスに対応付ける名前解決を行う。Webページのデータを返すのはWebサーバである。"
+  },
+  {
+    "id": "add20260531_security_003",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "question": "多要素認証の説明として、最も適切なものはどれか。",
+    "choices": [
+      "パスワードに加え、所持している端末や生体情報など別の種類の要素も使って確認する",
+      "長いパスワードを1つだけ使うこと",
+      "同じパスワードを複数のサービスで使い回すこと",
+      "ログイン画面を見えにくい場所に置くこと"
+    ],
+    "answer": 0,
+    "explanation": "多要素認証は、知識情報（パスワードなど）、所持情報（端末や認証アプリなど）、生体情報（指紋など）のように異なる種類の要素を組み合わせる考え方である。"
+  },
+  {
+    "id": "add20260531_computer_fig_001",
+    "category": "コンピュータの仕組み",
+    "difficulty": "standard",
+    "question": "図のCPUの処理の流れで、命令を主記憶から取り出す段階はどれか。",
+    "figureSvg": "<svg viewBox=\"0 0 560 220\" role=\"img\" aria-label=\"CPUの命令処理サイクル\"><rect x=\"40\" y=\"80\" width=\"110\" height=\"52\" rx=\"10\" fill=\"#dbeafe\" stroke=\"#2563eb\"/><text x=\"95\" y=\"111\" text-anchor=\"middle\" class=\"caption\">① フェッチ</text><rect x=\"225\" y=\"80\" width=\"110\" height=\"52\" rx=\"10\" fill=\"#fef3c7\" stroke=\"#d97706\"/><text x=\"280\" y=\"111\" text-anchor=\"middle\" class=\"caption\">② 解読</text><rect x=\"410\" y=\"80\" width=\"110\" height=\"52\" rx=\"10\" fill=\"#dcfce7\" stroke=\"#16a34a\"/><text x=\"465\" y=\"111\" text-anchor=\"middle\" class=\"caption\">③ 実行</text><line x1=\"150\" y1=\"106\" x2=\"225\" y2=\"106\" class=\"line\"/><line x1=\"335\" y1=\"106\" x2=\"410\" y2=\"106\" class=\"line\"/><path d=\"M465 132 C465 178 95 178 95 132\" class=\"grid\" fill=\"none\"/><text x=\"280\" y=\"195\" text-anchor=\"middle\" class=\"caption\">処理をくり返す</text></svg>",
+    "choices": [
+      "① フェッチ",
+      "② 解読",
+      "③ 実行",
+      "処理のくり返しが終わった後"
+    ],
+    "answer": 0,
+    "explanation": "フェッチは、CPUが主記憶から命令を取り出す段階である。その後、命令の意味を解読し、必要な演算や制御を実行する。"
+  },
+  {
+    "id": "add20260531_computer_002",
+    "category": "コンピュータの仕組み",
+    "difficulty": "advanced",
+    "question": "キャッシュメモリを用いる主な目的として、最も適切なものはどれか。",
+    "choices": [
+      "CPUと主記憶の速度差を小さくし、よく使うデータへのアクセスを速くする",
+      "電源を切っても必ずデータを長期間保存する",
+      "ネットワーク上の通信内容を暗号化する",
+      "ディスプレイに表示する色数を制限する"
+    ],
+    "answer": 0,
+    "explanation": "キャッシュメモリはCPUの近くに置かれる高速な記憶装置で、よく使う命令やデータを一時的に保持し、処理の待ち時間を減らす。"
   }
 ]
