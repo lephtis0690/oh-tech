@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1e40af">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>OH-TECH｜長岡大手高校 R8 情報科学習サイト</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="hero-content">
+      <p class="eyebrow">Nagaoka Ohte High School / Informatics I</p>
+      <h1>OH-TECH</h1>
+      <p class="school-name">新潟県立長岡大手高等学校　R8情報科学習用サイト</p>
+      <p class="lead">情報Ⅰを、短時間で、見やすく、くり返し確認できるトレーニングサイトです。</p>
+      <div class="hero-badges" aria-label="サイトの特徴">
+        <span>共通テスト基礎</span>
+        <span>４択演習</span>
+        <span>復習管理</span>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="orbit-card main">Info I</div>
+      <div class="orbit-card small top">DATA</div>
+      <div class="orbit-card small bottom">NET</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home" class="panel active">
+      <div class="top-bar">
+        <div class="top-title">
+          <span class="page-kicker">Dashboard</span>
+          <h2>学習ダッシュボード</h2>
+        </div>
+        <div class="top-actions">
+          <button id="openGuideBtn" class="ghost">使い方</button><button id="openUpdatesBtn" class="ghost">更新履歴</button>
+          <button id="openHistoryBtn" class="primary">問題一覧・記録を見る</button>
+        </div>
+      </div>
+      <div class="student-sync-card card" aria-label="学習記録送信設定">
+        <div class="student-sync-head">
+          <div>
+            <span class="dashboard-kicker">Learning Log</span>
+            <h2>学習記録の送信設定</h2>
+            <p>初回だけ学年・組・番号を登録します。結果は学習終了時に自動で送信されます。</p>
+          </div>
+          <div id="syncStatusBadge" class="sync-status-badge">未設定</div>
+        </div>
+        <div class="student-profile-grid">
+          <label>学年
+            <select id="studentGradeSelect">
+              <option value="1">1年</option>
+              <option value="2">2年</option>
+              <option value="3">3年</option>
+            </select>
+          </label>
+          <label>組
+            <input id="studentClassInput" type="number" inputmode="numeric" min="1" max="9" placeholder="例：3">
+          </label>
+          <label>番号
+            <input id="studentNumberInput" type="number" inputmode="numeric" min="1" max="99" placeholder="例：25">
+          </label>
+          <div class="student-profile-actions">
+            <button id="saveStudentProfileBtn" type="button" class="primary">登録・更新</button>
+            <button id="resetStudentProfileBtn" type="button" class="ghost">登録をやり直す</button>
+            <button id="resendLogsBtn" type="button" class="ghost">未送信を再送</button>
+          </div>
+        </div>
+        <p id="studentProfileMessage" class="student-profile-message"></p>
+      </div>
+
+      <div class="home-dashboard">
+        <section class="dashboard-card today-card" aria-label="今日の学習状況">
+          <div class="dashboard-heading">
+            <span class="dashboard-kicker">Today</span>
+            <h2>今日の学習状況</h2>
+          </div>
+          <div id="todayStats" class="today-stats"></div>
+        </section>
+        <section class="dashboard-card action-card" aria-label="前回の続きと苦手問題">
+          <div class="dashboard-heading">
+            <span class="dashboard-kicker">Next</span>
+            <h2>次にやること</h2>
+          </div>
+          <div id="nextLearningBox" class="next-learning-box"></div>
+        </section>
+      </div>
+<div class="stats-grid">
+        <div class="stat-card"><span>総問題数</span><strong id="totalQuestions">0</strong></div>
+        <div class="stat-card"><span>学習回数</span><strong id="studyCount">0</strong></div>
+        <div class="stat-card"><span>累計正答率</span><strong id="totalAccuracy">--%</strong></div>
+      </div><div class="card">
+        <div class="section-head"><span>Training</span><h2>トレーニング設定</h2><p>分野・難易度・問題数を選んで、今の理解度を確認します。</p></div>
+        <div class="form-grid">
+          <label>分野
+            <select id="categorySelect">
+              <option value="all">すべて</option>
+            </select>
+          </label>
+          <label>難易度
+            <select id="difficultySelect">
+              <option value="all">すべて</option>
+              <option value="intro">初級</option>
+              <option value="basic">基礎</option>
+              <option value="standard">標準</option>
+              <option value="advanced">発展</option>
+            </select>
+          </label>
+          <label>問題数
+            <select id="countSelect">
+              <option value="5">５問</option>
+              <option value="10" selected>１０問</option>
+              <option value="20">２０問</option><option value="all">すべて</option>
+            </select>
+          </label>
+          <label>計算問題
+            <select id="calculationSelect">
+              <option value="all">すべて</option>
+              <option value="only">計算問題のみ</option>
+              <option value="exclude">計算問題を除外</option>
+            </select>
+          </label>
+        </div>
+        <div class="button-row">
+          <button id="startBtn" class="primary">スタート</button>
+          <button id="reviewWrongBtn">間違えた問題だけ復習</button>
+          <button id="resetStatsBtn" class="danger">記録リセット</button>
+        </div>
+        <p id="homeMessage" class="message"></p>
+      </div>
+
+      <div class="card">
+        <div class="section-head"><span>Progress</span><h2>分野別の問題数・達成率</h2><p>未学習の分野や復習が必要な分野を確認できます。</p></div>
+        <div id="categoryStats" class="category-stats"></div>
+      </div>
+
+      
+    </section>
+
+    <section id="history" class="panel">
+      <div class="card">
+        <div class="history-page-head">
+          <button id="historyBackBtn" class="ghost">トップへ戻る</button>
+          <div class="section-head history-main-head">
+            <span>Question List</span>
+            <h2>問題を選んで学習・記録確認</h2>
+            <p>問題一覧・達成状況・復習開始をこの画面にまとめました。上のカードで状況を確認し、下の一覧から解きたい問題を選べます。</p>
+          </div>
+        </div>
+
+        <div id="historySummary" class="history-summary history-summary-compact"></div>
+
+        <div class="history-filter-block">
+          <div class="history-filter-title">
+            <strong>表示条件</strong>
+            <span>よく使う条件はボタンで切り替えできます。</span>
+          </div>
+          <div class="history-quick-tabs" aria-label="よく使う表示条件">
+          <button type="button" class="history-quick-tab active" data-history-quick="all">すべて</button>
+          <button type="button" class="history-quick-tab" data-history-quick="untried">未学習</button>
+          <button type="button" class="history-quick-tab" data-history-quick="wrong">直近誤答</button>
+          <button type="button" class="history-quick-tab" data-history-quick="low">弱点</button>
+          <button type="button" class="history-quick-tab" data-history-quick="guess">勘で解いた</button>
+          <button type="button" class="history-quick-tab" data-history-quick="medals">メダル</button>
+          </div>
+
+          <div class="history-controls">
+          <label>分野
+            <select id="historyCategoryFilter">
+              <option value="all">すべて</option>
+            </select>
+          </label>
+          <label>難易度
+            <select id="historyDifficultyFilter">
+              <option value="all">すべて</option>
+              <option value="intro">初級</option>
+              <option value="basic">基礎</option>
+              <option value="standard">標準</option>
+              <option value="advanced">発展</option>
+            </select>
+          </label>
+          <label>計算問題
+            <select id="historyCalculationFilter">
+              <option value="all">すべて</option>
+              <option value="only">計算問題のみ</option>
+              <option value="exclude">計算問題を除外</option>
+            </select>
+          </label>
+          <label>状態
+            <select id="historyStatusFilter">
+              <option value="all">すべて</option>
+              <option value="wrong">直近で間違えた問題</option>
+              <option value="untried">未学習問題</option>
+              <option value="low">正答率が低い問題（70％未満）</option>
+              <option value="medals">メダル獲得済み</option>
+              <option value="gold">金メダル（直近10回90％以上）</option>
+              <option value="silver">銀メダル（直近10回70％以上）</option>
+              <option value="bronze">銅メダル（直近10回50％以上）</option>
+              <option value="guess">「勘」が多い問題</option>
+              <option value="selfIncorrect">自己チェック「不正解」が多い問題</option>
+            </select>
+          </label>
+          <label>並び替え
+            <select id="historySortSelect">
+              <option value="category">分野順</option>
+              <option value="lowAccuracy">正答率が低い順</option>
+              <option value="highAccuracy">正答率が高い順</option>
+              <option value="recent">最近解いた順</option>
+              <option value="attempts">解答回数が多い順</option>
+            </select>
+          </label>
+          <label>キーワード
+            <input id="historySearchInput" type="search" placeholder="問題文・IDで検索">
+          </label>
+          </div>
+        </div>
+
+        <div class="history-study-toolbar">
+          <div>
+            <div id="historySelectionInfo" class="picker-info">0問選択中</div>
+            <p class="toolbar-note">チェックした問題だけを出題します。未選択でも各カードの「この問題を解く」から1問だけ練習できます。</p>
+          </div>
+          <div class="button-row compact">
+            <button id="historySelectVisibleBtn" type="button">表示中をすべて選択</button>
+            <button id="historyClearSelectedBtn" type="button" class="ghost">選択を解除</button>
+            <button id="historyStartSelectedBtn" type="button" class="primary">選んだ問題を開始</button>
+          </div>
+        </div>
+
+        <div id="historyResultInfo" class="history-result-info"></div>
+        <div id="questionHistory" class="question-history"></div>
+      </div>
+    </section>
+
+    <section id="updatesPanel" class="panel">
+      <div class="card updates-card">
+        <div class="history-page-head">
+          <button id="updatesBackBtn" class="ghost">トップへ戻る</button>
+          <div class="section-head history-main-head">
+            <span>Updates</span>
+            <h2>更新履歴</h2>
+            <p>最新10件の主な変更点を表示します。新しい変更にはNEWを表示します。</p>
+          </div>
+        </div>
+        <div class="updates-toolbar">
+          <div id="updatesLatestBadge" class="updates-latest-badge">読み込み中</div>
+          <button id="reloadUpdatesBtn" type="button" class="ghost">再読み込み</button>
+        </div>
+        <div id="updateHistoryList" class="update-history-list" aria-live="polite"></div>
+        <p id="updateHistoryMessage" class="update-history-message"></p>
+      </div>
+    </section>
+
+
+    <section id="quiz" class="panel">
+      <div class="quiz-top">
+        <div class="quiz-nav-actions" aria-label="問題画面の移動">
+          <button id="backHomeBtn" class="ghost" type="button">トップへ戻る</button>
+          <button id="backHistoryBtn" class="ghost" type="button">問題一覧に戻る</button>
+        </div>
+        <div class="progress"><span id="progressText">問題 1 / 10</span><div><i id="progressBar"></i></div></div>
+      </div>
+
+      <article class="card question-card">
+        <div class="tag-row">
+          <span id="questionCategory" class="tag"></span>
+          <span id="questionDifficulty" class="tag muted"></span>
+        </div>
+        <h2 id="questionText"></h2>
+        <div id="questionFigure" class="question-figure" aria-label="問題の図"></div>
+        <div id="choices" class="choices"></div>
+      </article>
+
+      <article id="feedback" class="card feedback hidden">
+        <h2 id="feedbackTitle"></h2>
+        <p id="correctAnswer"></p>
+        <p id="explanation"></p>
+        <div class="self-check" aria-label="解答後の自己チェック">
+          <p class="self-check-title">解答の自己チェック（選ばなくても次へ進めます）</p>
+          <div id="confidenceChoices" class="confidence-choices">
+            <button type="button" class="confidence-choice" data-confidence="confident">✓ 自信あり</button>
+            <button type="button" class="confidence-choice" data-confidence="guess">✓ 勘</button>
+            <button type="button" class="confidence-choice" data-confidence="incorrect">✓ 不正解</button>
+          </div>
+        </div>
+        <button id="nextBtn" class="primary">次の問題へ</button>
+      </article>
+    </section>
+
+    <section id="result" class="panel">
+      <article class="card result-card">
+        <h2>結果</h2>
+        <p class="score"><strong id="scoreText"></strong></p>
+        <p id="resultMessage"></p>
+        <div id="resultBreakdown" class="category-stats"></div>
+        <div class="button-row">
+          <button id="retryBtn" class="primary">もう一度挑戦</button>
+          <button id="reviewSessionWrongBtn">今回の間違いを復習</button>
+          <button id="toHomeBtn">トップへ戻る</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+
+  <div id="guideModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+    <div class="modal-backdrop" id="closeGuideBackdrop"></div>
+    <section class="modal-card guide-modal-card">
+      <div class="modal-head">
+        <div>
+          <p class="guide-kicker">OH-TECH Guide</p>
+          <h2 id="guideTitle">使い方</h2>
+        </div>
+        <button id="closeGuideBtn" class="ghost" type="button">閉じる</button>
+      </div>
+
+      <div class="guide-overview">
+        <p>このサイトは、情報Ⅰの４択問題を解きながら、６分野ごとの進み具合・正答率・苦手問題を確認できる学習サイトです。初回に学年・組・番号を登録すると、学習結果は終了時に自動送信されます。</p>
+      </div>
+
+      <div class="guide-section-grid">
+        <section class="guide-section highlight-guide-section">
+          <h3>１．最初に行うこと</h3>
+          <ol class="guide-list">
+            <li>トップ画面の「学習記録の送信設定」で、学年・組・番号を入力します。</li>
+            <li>「登録・更新」を押すと、この端末に設定が保存されます。</li>
+            <li>設定後は、問題を解き終えたときに学習結果が自動で送信されます。</li>
+          </ol>
+          <p class="guide-small-note">未設定のままでも練習はできますが、授業で記録を確認する場合は、先に登録してください。</p>
+        </section>
+
+        <section class="guide-section">
+          <h3>２．６つの分野</h3>
+          <ul class="guide-list">
+            <li><strong>情報社会と法</strong>：情報モラル、個人情報、著作権、産業財産権など</li>
+            <li><strong>情報デザイン</strong>：見やすさ、伝わりやすさ、ユニバーサルデザインなど</li>
+            <li><strong>コンピュータの仕組み</strong>：２進数、デジタル表現、CPU、記憶装置、OSなど</li>
+            <li><strong>プログラミング</strong>：アルゴリズム、フローチャート、擬似言語、処理の流れなど</li>
+            <li><strong>ネットワークとセキュリティ</strong>：通信の仕組み、暗号化、認証、マルウェア対策など</li>
+            <li><strong>データ活用</strong>：表・グラフ、統計、相関、回帰、データ分析など</li>
+          </ul>
+        </section>
+
+        <section class="guide-section">
+          <h3>３．通常の学習を始める</h3>
+          <ol class="guide-list">
+            <li>トップ画面の「トレーニング設定」で、分野・難易度・問題数を選びます。</li>
+            <li>計算問題を重点的に練習したい場合は「計算問題のみ」を選びます。</li>
+            <li>計算問題を避けたい場合は「計算問題を除外」を選びます。</li>
+            <li>「スタート」を押すと、条件に合う問題がランダムに出題されます。</li>
+          </ol>
+        </section>
+
+        <section class="guide-section">
+          <h3>４．トップ画面の見方</h3>
+          <ul class="guide-list">
+            <li><strong>今日の学習状況</strong>：今日解いた問題数や正答率を確認できます。</li>
+            <li><strong>次にやること</strong>：続きから、苦手問題、未学習問題などをすぐに始められます。</li>
+            <li><strong>分野別進捗度</strong>：６分野ごとの学習済み数、未学習数、達成率、正答率を確認できます。</li>
+          </ul>
+          <p class="guide-small-note">未学習が多い分野や正答率が低い分野から取り組むと、弱点を減らしやすくなります。</p>
+        </section>
+
+        <section class="guide-section">
+          <h3>５．問題一覧・記録確認</h3>
+          <ol class="guide-list">
+            <li>トップ右上の「問題一覧・記録を見る」を開きます。</li>
+            <li>分野・難易度・学習状態・計算問題・キーワードで絞り込みます。</li>
+            <li>問題は<strong>10件ずつ</strong>表示されます。10件を超える場合は「前の10件」「次の10件」でページを切り替えます。</li>
+            <li>「表示中をすべて選択」は、現在表示されている10件だけを選択します。</li>
+            <li>解きたい問題を選んで「選んだ問題を開始」を押すと、選択した問題だけを練習できます。</li>
+          </ol>
+        </section>
+
+        <section class="guide-section highlight-guide-section">
+          <h3>６．苦手問題の考え方</h3>
+          <ul class="guide-list">
+            <li><strong>直近誤答</strong>：最後に解いたときに間違えた問題です。</li>
+            <li><strong>弱点問題</strong>：これまでの正答率が70％未満の問題です。</li>
+            <li><strong>勘で解いた問題</strong>：自己チェックで「勘」を選んだ問題です。</li>
+            <li><strong>自信なし問題</strong>：自己チェックで「不正解」を選んだ問題です。</li>
+          </ul>
+          <p class="guide-small-note">復習では、直近誤答 → 弱点問題 → 勘で解いた問題の順に確認すると効果的です。</p>
+        </section>
+
+        <section class="guide-section">
+          <h3>７．解答後の自己チェック</h3>
+          <ul class="guide-list">
+            <li><strong>自信あり</strong>：理由まで理解して解けたときに選びます。</li>
+            <li><strong>勘</strong>：正解したが、考え方に自信がないときに選びます。</li>
+            <li><strong>不正解</strong>：間違えた、または解説を読んでも不安が残るときに選びます。</li>
+          </ul>
+          <p class="guide-small-note">自己チェックを正直に選ぶほど、復習するべき問題が見つけやすくなります。</p>
+        </section>
+
+        <section class="guide-section">
+          <h3>８．メダルの条件</h3>
+          <ul class="guide-list">
+            <li><strong>🥇 金メダル</strong>：その問題の直近10回の正答率が90％以上</li>
+            <li><strong>🥈 銀メダル</strong>：その問題の直近10回の正答率が70％以上</li>
+            <li><strong>🥉 銅メダル</strong>：その問題の直近10回の正答率が50％以上</li>
+            <li>10回未満の問題は、メダル判定の準備中として扱います。</li>
+          </ul>
+        </section>
+
+        <section class="guide-section">
+          <h3>９．おすすめの学習順</h3>
+          <ol class="guide-list">
+            <li>まずは６分野の未学習問題を少しずつ減らします。</li>
+            <li>正答率が低い分野は、初級・基礎から解き直します。</li>
+            <li>直近誤答や「勘」で解いた問題を復習します。</li>
+            <li>計算が苦手な場合は「計算問題のみ」で短時間練習します。</li>
+            <li>テスト前は、メダルがない問題や銅メダル以下の問題を重点的に確認します。</li>
+          </ol>
+        </section>
+      </div>
+
+      <p class="guide-note">この端末のブラウザにも学習記録が保存されます。問題ごとの履歴は分析用に直近30回分、苦手問題リストは最大100問分を保持します。別の端末やブラウザではローカル記録は共有されません。学習記録の送信設定をしている場合は、学習終了時に結果が自動送信されます。</p>
+    </section>
+  </div>
+
+  <footer class="site-footer">情報Ⅰの授業・自習用のシンプルなトレーニングサイトです。</footer>
+  <script src="data/questions.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
