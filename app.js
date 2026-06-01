@@ -7,7 +7,7 @@ const TUTORIAL_HIDDEN_KEY = "info1TrainingTutorialHiddenV1";
 const MEDAL_RECENT_LIMIT = 10;
 const ANALYSIS_RECENT_LIMIT = 30;
 const WRONG_LIST_LIMIT = 100;
-const LEARNING_LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbxRCWAiqikLP3_8Pby9LKvb8gyhXssPzzYV5cnEFYdXMvq24s73pgXqQCEclNcgDLpowg/exec";
+const LEARNING_LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbxUF7um8ws18HsfKeffU-xUgHwNL0a9CRLlUb1t6Er0k9C1om-gc5h5765ZkSoL_ut-/exec";
 const STUDENT_PROFILE_KEY = "info1TrainingStudentProfileV1";
 const PENDING_LOGS_KEY = "info1TrainingPendingLearningLogsV1";
 const MAX_PENDING_LOGS = 50;
@@ -208,7 +208,6 @@ async function flushPendingLearningLogs(){
       : '学習記録を送信しました。';
   }finally{
     isFlushingLearningLogs = false;
-    if(resendBtn) resendBtn.disabled = false;
     renderStudentProfileBox();
   }
 }
@@ -222,6 +221,18 @@ function renderStudentProfileBox(){
     $('studentClassInput').value = String(profile.classNumber);
     $('studentNumberInput').value = String(profile.studentNumber);
   }
+  const resendBtn = $('resendLogsBtn');
+  if(resendBtn){
+    const canResend = Boolean(profile) && pending > 0 && !isFlushingLearningLogs;
+    resendBtn.disabled = !canResend;
+    resendBtn.setAttribute('aria-disabled', String(!canResend));
+    resendBtn.title = !profile
+      ? '学年・組・番号を登録すると利用できます。'
+      : pending > 0
+        ? '未送信データを再送します。'
+        : '未送信データはありません。';
+  }
+
   const badge = $('syncStatusBadge');
   if(badge){
     if(!profile){
@@ -250,16 +261,21 @@ function buildCategorySummary(answers){
   }, {});
 }
 
+function getAnsweredSessionAnswers(){
+  return sessionAnswers.filter(a => a && a.id);
+}
+
 function buildLearningSessionPayload(){
   const profile = loadStudentProfile();
   const now = new Date();
   const startedAt = sessionStartedAt || now.toISOString();
   const finishedAt = now.toISOString();
-  const totalQuestions = sessionAnswers.length;
-  const correctCount = sessionAnswers.filter(a => a.correct).length;
+  const answered = getAnsweredSessionAnswers();
+  const totalQuestions = answered.length;
+  const correctCount = answered.filter(a => a.correct).length;
   const studySeconds = Math.max(0, Math.round((new Date(finishedAt).getTime() - new Date(startedAt).getTime()) / 1000));
-  const details = sessionAnswers.map((a, index) => {
-    const q = sessionQuestions[index] || QUESTIONS.find(item => item.id === a.id) || {};
+  const details = answered.map(a => {
+    const q = sessionQuestions.find(item => item.id === a.id) || QUESTIONS.find(item => item.id === a.id) || {};
     return {
       questionId: a.id,
       category: a.category,
@@ -285,7 +301,7 @@ function buildLearningSessionPayload(){
     correctCount,
     accuracy: totalQuestions ? Math.round(correctCount / totalQuestions * 100) : 0,
     studySeconds,
-    categorySummary: buildCategorySummary(sessionAnswers),
+    categorySummary: buildCategorySummary(answered),
     answers: details,
     userAgent: navigator.userAgent,
     appName: 'OH-TECH'
@@ -294,13 +310,20 @@ function buildLearningSessionPayload(){
 
 function recordLearningSessionForSync(){
   const payload = buildLearningSessionPayload();
+  if(!payload.answers || payload.answers.length === 0){
+    lastSyncMessage = '解答がないため、学習記録は送信しませんでした。';
+    renderStudentProfileBox();
+    return false;
+  }
+
   enqueueLearningLog(payload);
   if(!loadStudentProfile()){
     lastSyncMessage = '生徒IDが未登録のため、結果はこの端末内に一時保存しました。登録後に送信されます。';
     renderStudentProfileBox();
-    return;
+    return true;
   }
   flushPendingLearningLogs();
+  return true;
 }
 
 function loadStats(){
@@ -1554,13 +1577,21 @@ function nextQuestion(){
 }
 
 function finishQuiz(){
+  const answered = getAnsweredSessionAnswers();
+  if(answered.length === 0){
+    lastSyncMessage = '解答がないため、学習記録は送信しませんでした。';
+    renderStudentProfileBox();
+    showPanel('home');
+    return;
+  }
+
   const stats = loadStats();
   stats.sessions++;
   const todayKey = getTodayKey();
   stats.daily ||= {};
   stats.daily[todayKey] ||= {sessions:0, answered:0, correct:0};
   stats.daily[todayKey].sessions++;
-  sessionAnswers.forEach(a => {
+  answered.forEach(a => {
     stats.answered++;
     if(a.correct) stats.correct++;
     stats.daily[todayKey].answered++;
@@ -1584,9 +1615,9 @@ function finishQuiz(){
     qStat.recentAnswers = qStat.recentAnswers.slice(-ANALYSIS_RECENT_LIMIT);
     qStat.lastAnsweredAt = answeredAt;
   });
-  const wrongIds = sessionAnswers.filter(a=>!a.correct).map(a=>a.id);
+  const wrongIds = answered.filter(a=>!a.correct).map(a=>a.id);
   stats.wrongIds = [...new Set([...wrongIds, ...stats.wrongIds])].slice(0, WRONG_LIST_LIMIT);
-  const correctIds = sessionAnswers.filter(a=>a.correct).map(a=>a.id);
+  const correctIds = answered.filter(a=>a.correct).map(a=>a.id);
   stats.wrongIds = stats.wrongIds.filter(id => !correctIds.includes(id));
   saveStats(stats);
   recordLearningSessionForSync();
