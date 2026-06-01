@@ -7,7 +7,7 @@ const TUTORIAL_HIDDEN_KEY = "info1TrainingTutorialHiddenV1";
 const MEDAL_RECENT_LIMIT = 10;
 const ANALYSIS_RECENT_LIMIT = 30;
 const WRONG_LIST_LIMIT = 100;
-const LEARNING_LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbyvOF4Wzmpz4R0-YSkkg9-oeGxZg2jpJZcaikCCrSSN4GIs4gUB-gNzZkW1JJ82lyBikg/exec";
+const LEARNING_LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbxUF7um8ws18HsfKeffU-xUgHwNL0a9CRLlUb1t6Er0k9C1om-gc5h5765ZkSoL_ut-/exec";
 const STUDENT_PROFILE_KEY = "info1TrainingStudentProfileV1";
 const PENDING_LOGS_KEY = "info1TrainingPendingLearningLogsV1";
 const MAX_PENDING_LOGS = 50;
@@ -47,6 +47,7 @@ let historyCurrentPage = 1;
 let historyPageRows = [];
 let sessionStartedAt = null;
 let lastSyncMessage = "";
+let isFlushingLearningLogs = false;
 
 function loadStudentProfile(){
   try{
@@ -130,9 +131,21 @@ function getPendingLogCount(){
   return loadPendingLearningLogs().length;
 }
 
+function makeClientSessionId(){
+  return `session_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+}
+
 function enqueueLearningLog(payload){
   const logs = loadPendingLearningLogs();
-  logs.push({ id: `log_${Date.now()}_${Math.random().toString(36).slice(2)}`, payload, createdAt: new Date().toISOString() });
+  const nextPayload = { ...payload };
+  if(!nextPayload.sessionId){
+    nextPayload.sessionId = makeClientSessionId();
+  }
+  logs.push({
+    id: nextPayload.sessionId,
+    payload: nextPayload,
+    createdAt: new Date().toISOString()
+  });
   savePendingLearningLogs(logs);
   renderStudentProfileBox();
 }
@@ -152,23 +165,52 @@ async function flushPendingLearningLogs(){
     renderStudentProfileBox();
     return;
   }
+
+  if(isFlushingLearningLogs){
+    lastSyncMessage = '送信処理中です。完了するまでお待ちください。';
+    renderStudentProfileBox();
+    return;
+  }
+
   let logs = loadPendingLearningLogs();
   if(!logs.length){
     lastSyncMessage = '未送信データはありません。';
     renderStudentProfileBox();
     return;
   }
+
+  isFlushingLearningLogs = true;
+  const resendBtn = $('resendLogsBtn');
+  if(resendBtn) resendBtn.disabled = true;
+
   const remaining = [];
-  for(const item of logs){
-    try{
-      await sendLearningLog({ ...item.payload, studentId: buildStudentId(profile), grade: profile.grade, classNumber: profile.classNumber, studentNumber: profile.studentNumber });
-    }catch(e){
-      remaining.push(item);
+  try{
+    for(const item of logs){
+      try{
+        const stableSessionId = item.payload?.sessionId || item.id || makeClientSessionId();
+        const payload = {
+          ...item.payload,
+          sessionId: stableSessionId,
+          studentId: buildStudentId(profile),
+          grade: profile.grade,
+          classNumber: profile.classNumber,
+          studentNumber: profile.studentNumber
+        };
+        await sendLearningLog(payload);
+      }catch(e){
+        remaining.push(item);
+      }
     }
+
+    savePendingLearningLogs(remaining);
+    lastSyncMessage = remaining.length
+      ? `未送信データが${remaining.length}件残っています。通信できる状態で再送してください。`
+      : '学習記録を送信しました。';
+  }finally{
+    isFlushingLearningLogs = false;
+    if(resendBtn) resendBtn.disabled = false;
+    renderStudentProfileBox();
   }
-  savePendingLearningLogs(remaining);
-  lastSyncMessage = remaining.length ? `未送信データが${remaining.length}件残っています。通信できる状態で再送してください。` : '学習記録を送信しました。';
-  renderStudentProfileBox();
 }
 
 function renderStudentProfileBox(){
