@@ -7,7 +7,7 @@ const TUTORIAL_HIDDEN_KEY = "info1TrainingTutorialHiddenV1";
 const MEDAL_RECENT_LIMIT = 10;
 const ANALYSIS_RECENT_LIMIT = 30;
 const WRONG_LIST_LIMIT = 100;
-const LEARNING_LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbyvOF4Wzmpz4R0-YSkkg9-oeGxZg2jpJZcaikCCrSSN4GIs4gUB-gNzZkW1JJ82lyBikg/exec";
+const LEARNING_LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbxUF7um8ws18HsfKeffU-xUgHwNL0a9CRLlUb1t6Er0k9C1om-gc5h5765ZkSoL_ut-/exec";
 const STUDENT_PROFILE_KEY = "info1TrainingStudentProfileV1";
 const PENDING_LOGS_KEY = "info1TrainingPendingLearningLogsV1";
 const MAX_PENDING_LOGS = 50;
@@ -48,7 +48,6 @@ let historyPageRows = [];
 let sessionStartedAt = null;
 let lastSyncMessage = "";
 let isFlushingLearningLogs = false;
-let flushLearningLogsTimer = null;
 
 function loadStudentProfile(){
   try{
@@ -155,20 +154,9 @@ async function sendLearningLog(payload){
   await fetch(LEARNING_LOG_ENDPOINT, {
     method: 'POST',
     mode: 'no-cors',
-    cache: 'no-store',
-    credentials: 'omit',
-    keepalive: true,
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify(payload)
   });
-}
-
-function scheduleFlushPendingLearningLogs(delay = 250){
-  if(flushLearningLogsTimer) clearTimeout(flushLearningLogsTimer);
-  flushLearningLogsTimer = setTimeout(() => {
-    flushLearningLogsTimer = null;
-    flushPendingLearningLogs();
-  }, delay);
 }
 
 async function flushPendingLearningLogs(){
@@ -179,9 +167,8 @@ async function flushPendingLearningLogs(){
   }
 
   if(isFlushingLearningLogs){
-    lastSyncMessage = '送信処理中です。今回の解答も送信待ちに入っています。';
+    lastSyncMessage = '送信処理中です。完了するまでお待ちください。';
     renderStudentProfileBox();
-    scheduleFlushPendingLearningLogs(800);
     return;
   }
 
@@ -215,13 +202,9 @@ async function flushPendingLearningLogs(){
       }
     }
 
-    const processedIds = new Set(logs.map(item => item.id));
-    const latestLogs = loadPendingLearningLogs();
-    const newlyAddedLogs = latestLogs.filter(item => !processedIds.has(item.id));
-    const nextRemaining = [...remaining, ...newlyAddedLogs];
-    savePendingLearningLogs(nextRemaining);
-    lastSyncMessage = nextRemaining.length
-      ? `未送信データが${nextRemaining.length}件残っています。通信できる状態で再送してください。`
+    savePendingLearningLogs(remaining);
+    lastSyncMessage = remaining.length
+      ? `未送信データが${remaining.length}件残っています。通信できる状態で再送してください。`
       : '学習記録を送信しました。';
   }finally{
     isFlushingLearningLogs = false;
@@ -382,7 +365,7 @@ function recordAnsweredQuestionForSync(answerIndex){
     renderStudentProfileBox();
     return true;
   }
-  scheduleFlushPendingLearningLogs(150);
+  flushPendingLearningLogs();
   return true;
 }
 
@@ -400,7 +383,7 @@ function recordLearningSessionForSync(){
     renderStudentProfileBox();
     return true;
   }
-  scheduleFlushPendingLearningLogs(150);
+  flushPendingLearningLogs();
   return true;
 }
 
