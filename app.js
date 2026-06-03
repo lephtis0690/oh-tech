@@ -7,7 +7,7 @@ const TUTORIAL_HIDDEN_KEY = "info1TrainingTutorialHiddenV1";
 const MEDAL_RECENT_LIMIT = 10;
 const ANALYSIS_RECENT_LIMIT = 30;
 const WRONG_LIST_LIMIT = 100;
-const LEARNING_LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbyvOF4Wzmpz4R0-YSkkg9-oeGxZg2jpJZcaikCCrSSN4GIs4gUB-gNzZkW1JJ82lyBikg/exec";
+const LEARNING_LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbxUF7um8ws18HsfKeffU-xUgHwNL0a9CRLlUb1t6Er0k9C1om-gc5h5765ZkSoL_ut-/exec";
 const STUDENT_PROFILE_KEY = "info1TrainingStudentProfileV1";
 const PENDING_LOGS_KEY = "info1TrainingPendingLearningLogsV1";
 const MAX_PENDING_LOGS = 50;
@@ -306,6 +306,67 @@ function buildLearningSessionPayload(){
     userAgent: navigator.userAgent,
     appName: 'OH-TECH'
   };
+}
+
+function buildSingleAnswerPayload(answer, answerIndex){
+  const profile = loadStudentProfile();
+  const now = new Date();
+  const startedAt = sessionStartedAt || now.toISOString();
+  const finishedAt = now.toISOString();
+  const q = sessionQuestions.find(item => item.id === answer.id) || QUESTIONS.find(item => item.id === answer.id) || {};
+  const detail = {
+    questionId: answer.id,
+    category: answer.category,
+    selectedIndex: answer.selected,
+    selectedAnswer: q.choices?.[answer.selected] || '',
+    correctAnswer: q.choices?.[q.answer] || '',
+    isCorrect: answer.correct,
+    confidence: answer.confidence || ''
+  };
+  const correctCount = answer.correct ? 1 : 0;
+  return {
+    sessionId: answer.syncId || makeClientSessionId(),
+    submittedAt: finishedAt,
+    startedAt,
+    finishedAt,
+    studentId: profile ? buildStudentId(profile) : '',
+    grade: profile?.grade || '',
+    classNumber: profile?.classNumber || '',
+    studentNumber: profile?.studentNumber || '',
+    mode: lastConfig?.selectedIds ? 'selected' : 'normal',
+    category: answer.category || lastConfig?.category || 'all',
+    difficulty: q.difficulty || lastConfig?.difficulty || 'all',
+    totalQuestions: 1,
+    correctCount,
+    accuracy: answer.correct ? 100 : 0,
+    studySeconds: Math.max(0, Math.round((new Date(finishedAt).getTime() - new Date(startedAt).getTime()) / 1000)),
+    categorySummary: buildCategorySummary([answer]),
+    answers: [detail],
+    userAgent: navigator.userAgent,
+    appName: 'OH-TECH',
+    eventType: 'answer',
+    questionNumber: answerIndex + 1,
+    plannedQuestionCount: sessionQuestions.length
+  };
+}
+
+function recordAnsweredQuestionForSync(answerIndex){
+  const answer = sessionAnswers[answerIndex];
+  if(!answer || !answer.id) return false;
+  if(answer.syncQueued) return false;
+  answer.syncId = answer.syncId || makeClientSessionId();
+  answer.syncQueued = true;
+  const payload = buildSingleAnswerPayload(answer, answerIndex);
+  enqueueLearningLog(payload);
+  saveQuizProgress();
+
+  if(!loadStudentProfile()){
+    lastSyncMessage = '生徒IDが未登録のため、解答結果はこの端末内に一時保存しました。登録後に送信されます。';
+    renderStudentProfileBox();
+    return true;
+  }
+  flushPendingLearningLogs();
+  return true;
 }
 
 function recordLearningSessionForSync(){
@@ -1049,14 +1110,12 @@ function renderDifficultyBreakdownForCategory(category, categoryDifficultyCounts
 
 function getCategoryIcon(category){
   const icons = {
-    "情報社会": "🌐",
-    "知的財産権": "©",
+    "情報社会と法": "🌐",
     "情報デザイン": "🎨",
-    "コンピュータとデジタル表現": "💻",
-    "アルゴリズムとプログラミング": "🧩",
-    "情報通信ネットワーク": "🔗",
-    "情報セキュリティ": "🔐",
-    "データの活用": "📊"
+    "コンピュータの仕組み": "💻",
+    "プログラミング": "🧩",
+    "ネットワークとセキュリティ": "🔐",
+    "データ活用": "📊"
   };
   return icons[category] || "📘";
 }
@@ -1533,7 +1592,16 @@ function scrollToFeedback(){
 function answerQuestion(selected){
   const q = sessionQuestions[currentIndex];
   const correct = selected === q.answer;
-  sessionAnswers[currentIndex] = { id: q.id, category: q.category, correct, selected, confidence: null };
+  const previousAnswer = sessionAnswers[currentIndex] || {};
+  sessionAnswers[currentIndex] = {
+    ...previousAnswer,
+    id: q.id,
+    category: q.category,
+    correct,
+    selected,
+    confidence: previousAnswer.confidence || null
+  };
+  recordAnsweredQuestionForSync(currentIndex);
   saveQuizProgress();
   document.querySelectorAll('.choice').forEach((btn, i) => {
     btn.disabled = true;
@@ -1620,7 +1688,6 @@ function finishQuiz(){
   const correctIds = answered.filter(a=>a.correct).map(a=>a.id);
   stats.wrongIds = stats.wrongIds.filter(id => !correctIds.includes(id));
   saveStats(stats);
-  recordLearningSessionForSync();
   clearQuizProgress();
   renderResult();
   showPanel('result');

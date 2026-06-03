@@ -5807,5 +5807,515 @@
     ],
     "answer": 1,
     "explanation": "商品表と販売表を商品IDで結合する必要がある。"
+  },
+  {
+    "id": "float_adv_001",
+    "category": "コンピュータの仕組み",
+    "difficulty": "advanced",
+    "question": "コンピュータで実数を浮動小数点数として表現する場合の説明として、最も適切なものはどれか。",
+    "choices": [
+      "すべての10進小数は誤差なく表現できる。",
+      "同じビット数なら固定小数点数より表現範囲が狭い。",
+      "非常に大きな値から非常に小さな値まで効率よく表現できる。",
+      "小数点の位置は常に固定される。"
+    ],
+    "answer": 2,
+    "explanation": "指数部を用いることで広い範囲の数値を表現できる。"
+  },
+  {
+    "id": "float_adv_002",
+    "category": "コンピュータの仕組み",
+    "difficulty": "advanced",
+    "question": "0.1+0.2の計算結果が0.30000000000000004と表示されることがある主な理由はどれか。",
+    "choices": [
+      "CPUの故障",
+      "0.1や0.2を2進数で正確に表現できないため",
+      "メモリ不足",
+      "演算速度向上のため必ず四捨五入されるため"
+    ],
+    "answer": 1,
+    "explanation": "0.1や0.2は2進小数で有限桁にならず近似値として保存される。"
+  },
+  {
+    "id": "float_adv_003",
+    "category": "コンピュータの仕組み",
+    "difficulty": "advanced",
+    "question": "有効数字4桁の浮動小数点形式で12345を保存するとき、最も適切な表現はどれか。",
+    "choices": [
+      "12345",
+      "12340",
+      "1.235×10^4",
+      "1.2345×10^4"
+    ],
+    "answer": 2,
+    "explanation": "有効数字4桁なので1.235×10^4に丸められる。"
+  },
+  {
+    "id": "float_adv_004",
+    "category": "コンピュータの仕組み",
+    "difficulty": "advanced",
+    "question": "1000000.1−1000000.0のような計算で精度が悪化する現象を何というか。",
+    "choices": [
+      "オーバフロー",
+      "アンダフロー",
+      "桁落ち",
+      "切り捨て誤差"
+    ],
+    "answer": 2,
+    "explanation": "近い値同士の減算で有効数字が失われる現象を桁落ちという。"
+  },
+  {
+    "id": "float_adv_005",
+    "category": "コンピュータの仕組み",
+    "difficulty": "advanced",
+    "question": "浮動小数点数の演算でオーバフローが発生した状態として正しいものはどれか。",
+    "choices": [
+      "表現可能な最大値を超えた",
+      "表現可能な最小の正の値より小さくなった",
+      "小数部分が切り捨てられた",
+      "近似誤差が発生した"
+    ],
+    "answer": 0,
+    "explanation": "表現可能な最大値を超えるとオーバフローとなる。"
+  },
+  {
+    "id": "float_adv_006",
+    "category": "コンピュータの仕組み",
+    "difficulty": "advanced",
+    "question": "浮動小数点数のアンダフローの説明として最も適切なものはどれか。",
+    "choices": [
+      "計算結果が負になった",
+      "計算結果が0になった",
+      "表現できる最小の正の値より絶対値が小さくなった",
+      "有効数字が不足した"
+    ],
+    "answer": 2,
+    "explanation": "極めて小さな値となり表現範囲を下回る状態である。"
+  },
+  {
+    "id": "float_adv_007",
+    "category": "コンピュータの仕組み",
+    "difficulty": "advanced",
+    "question": "固定小数点数と浮動小数点数を比較した説明として適切なものはどれか。",
+    "choices": [
+      "固定小数点数の方が表現範囲が広い",
+      "浮動小数点数は指数部を用いて表現範囲を広げる",
+      "固定小数点数は誤差が発生しない",
+      "浮動小数点数は整数を表現できない"
+    ],
+    "answer": 1,
+    "explanation": "指数部によって幅広い値を扱える。"
+  },
+  {
+    "id": "float_adv_008",
+    "category": "コンピュータの仕組み",
+    "difficulty": "advanced",
+    "question": "変数xに対して x=x+0.1 を100万回繰り返した結果が理論値と一致しない可能性がある主な理由はどれか。",
+    "choices": [
+      "CPUが途中で停止するため",
+      "0.1の近似誤差が蓄積するため",
+      "メモリ内容が変化するため",
+      "整数に変換されるため"
+    ],
+    "answer": 1,
+    "explanation": "近似値の加算を繰り返すことで誤差が蓄積する。"
+  },
+  {
+    "id": "logic_adv_001",
+    "category": "プログラミング",
+    "difficulty": "advanced",
+    "question": "A=真、B=偽のとき、A AND (NOT B) の結果として正しいものはどれか。",
+    "choices": [
+      "真",
+      "偽",
+      "Aと同じ",
+      "Bと同じ"
+    ],
+    "answer": 0,
+    "explanation": "NOT Bは真なので、真 AND 真 = 真。"
+  },
+  {
+    "id": "logic_adv_002",
+    "category": "プログラミング",
+    "difficulty": "advanced",
+    "question": "A=偽、B=真のとき、(A OR B) AND A の結果として正しいものはどれか。",
+    "choices": [
+      "真",
+      "偽",
+      "A OR B と同じ",
+      "B と同じ"
+    ],
+    "answer": 1,
+    "explanation": "A OR B は真だが、真 AND 偽 = 偽。"
+  },
+  {
+    "id": "logic_adv_003",
+    "category": "プログラミング",
+    "difficulty": "advanced",
+    "question": "NOT(A AND B) と同じ結果になる論理式はどれか。",
+    "choices": [
+      "(NOT A) AND (NOT B)",
+      "(NOT A) OR (NOT B)",
+      "A OR B",
+      "A AND (NOT B)"
+    ],
+    "answer": 1,
+    "explanation": "ド・モルガンの法則。"
+  },
+  {
+    "id": "logic_adv_004",
+    "category": "プログラミング",
+    "difficulty": "advanced",
+    "question": "結果が真になる場合が最も少ない論理式はどれか。",
+    "choices": [
+      "A OR B",
+      "A AND B",
+      "NOT A",
+      "NOT B"
+    ],
+    "answer": 1,
+    "explanation": "A AND B が真になるのは4通り中1通りのみ。"
+  },
+  {
+    "id": "logic_adv_005",
+    "category": "プログラミング",
+    "difficulty": "advanced",
+    "question": "『生徒証を持っている AND マスクを着用している』が入室条件である。生徒証を持っているがマスクを着用していない場合はどうなるか。",
+    "choices": [
+      "入室できる",
+      "入室できない",
+      "条件だけでは判断できない",
+      "生徒証は関係ない"
+    ],
+    "answer": 1,
+    "explanation": "AND条件なので両方満たす必要がある。"
+  },
+  {
+    "id": "logic_adv_006",
+    "category": "プログラミング",
+    "difficulty": "advanced",
+    "question": "数学または英語のどちらか一方だけが合格で真となる論理式はどれか。",
+    "choices": [
+      "A AND B",
+      "A OR B",
+      "(A OR B) AND NOT(A AND B)",
+      "NOT(A OR B)"
+    ],
+    "answer": 2,
+    "explanation": "排他的OR(XOR)に相当する。"
+  },
+  {
+    "id": "logic_adv_007",
+    "category": "プログラミング",
+    "difficulty": "advanced",
+    "question": "A=真、B=真のとき、(A OR B) AND (NOT A) の結果はどれか。",
+    "choices": [
+      "真",
+      "偽",
+      "Aと同じ",
+      "Bと同じ"
+    ],
+    "answer": 1,
+    "explanation": "A OR B は真、NOT A は偽なので結果は偽。"
+  },
+  {
+    "id": "logic_adv_008",
+    "category": "プログラミング",
+    "difficulty": "advanced",
+    "question": "(A AND B) OR (A AND NOT B) と同じ結果になるものはどれか。",
+    "choices": [
+      "A",
+      "B",
+      "NOT A",
+      "A OR B"
+    ],
+    "answer": 0,
+    "explanation": "A AND (B OR NOT B)=A。"
+  },
+  {
+    "id": "network_adv_001",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "question": "あるWebサイトを閲覧する際、DNSによる名前解決が完了した直後に通常行われる処理として最も適切なものはどれか。",
+    "choices": [
+      "SMTPによるメール送信",
+      "TCP接続の確立",
+      "DHCPによるIPアドレス取得",
+      "ARPの無効化"
+    ],
+    "answer": 1,
+    "explanation": "名前解決後、WebサーバとのTCP接続を確立してからHTTP/HTTPS通信を行う。"
+  },
+  {
+    "id": "network_adv_002",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "question": "学校のPC教室で同じLAN内のPC同士が通信する際、IPアドレスに対応するMACアドレスを調べるために利用される仕組みはどれか。",
+    "choices": [
+      "ARP",
+      "DNS",
+      "DHCP",
+      "NTP"
+    ],
+    "answer": 0,
+    "explanation": "ARPはIPアドレスからMACアドレスを調べる。"
+  },
+  {
+    "id": "network_adv_003",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "question": "動画配信のライブ中継で、多少のデータ欠落よりも遅延の少なさを優先したい。この用途に比較的適しているプロトコルはどれか。",
+    "choices": [
+      "UDP",
+      "TCP",
+      "POP3",
+      "IMAP"
+    ],
+    "answer": 0,
+    "explanation": "UDPは到達確認を行わず低遅延通信に向く。"
+  },
+  {
+    "id": "network_adv_004",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "question": "家庭内LANの無線端末がインターネットへ接続する際、無線通信を有線LANへ中継する機器として最も適切なものはどれか。",
+    "choices": [
+      "アクセスポイント",
+      "DNSサーバ",
+      "ルータ",
+      "DHCPサーバ"
+    ],
+    "answer": 0,
+    "explanation": "アクセスポイントは無線LAN端末をネットワークへ接続する。"
+  },
+  {
+    "id": "network_adv_005",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "question": "メールを複数の端末で同期しながら利用したい。この目的に最も適した受信プロトコルはどれか。",
+    "choices": [
+      "IMAP",
+      "POP3",
+      "SMTP",
+      "FTP"
+    ],
+    "answer": 0,
+    "explanation": "IMAPはメールをサーバ上で管理し複数端末で同期しやすい。"
+  },
+  {
+    "id": "network_adv_006",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "question": "スイッチングハブが転送先ポートを判断する際に主に利用する情報はどれか。",
+    "choices": [
+      "MACアドレス",
+      "ドメイン名",
+      "URL",
+      "メールアドレス"
+    ],
+    "answer": 0,
+    "explanation": "スイッチングハブはMACアドレス表を利用する。"
+  },
+  {
+    "id": "network_adv_007",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "question": "HTTPS通信で期待される効果として最も適切なものはどれか。",
+    "choices": [
+      "通信内容の盗み見防止",
+      "IPアドレスの自動割当",
+      "メールの受信",
+      "LAN内機器の検索"
+    ],
+    "answer": 0,
+    "explanation": "HTTPSはTLS等により通信を暗号化する。"
+  },
+  {
+    "id": "network_adv_008",
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "question": "PCをネットワークへ接続した際、自動的にIPアドレスやデフォルトゲートウェイなどを配布するサーバはどれか。",
+    "choices": [
+      "DHCPサーバ",
+      "DNSサーバ",
+      "Webサーバ",
+      "メールサーバ"
+    ],
+    "answer": 0,
+    "explanation": "DHCPはネットワーク設定を自動配布する。"
+  },
+  {
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "id": "network_device_svg_001",
+    "question": "図のPCがWebサイトを閲覧するとき、URLに含まれるドメイン名からIPアドレスを調べるために問い合わせる機器はどれか。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 760 260' role='img' aria-label='PC、DNSサーバ、ルータ、Webサーバのネットワーク図'><rect x='40' y='100' width='110' height='56' rx='8' fill='#e0f2fe' stroke='#111827' stroke-width='2'/><text x='95' y='134' text-anchor='middle' font-size='18'>PC</text><rect x='280' y='34' width='150' height='56' rx='8' fill='#fef3c7' stroke='#111827' stroke-width='2'/><text x='355' y='68' text-anchor='middle' font-size='18'>DNSサーバ</text><rect x='280' y='166' width='150' height='56' rx='8' fill='#dbeafe' stroke='#111827' stroke-width='2'/><text x='355' y='200' text-anchor='middle' font-size='18'>ルータ</text><rect x='570' y='100' width='140' height='56' rx='8' fill='#dcfce7' stroke='#111827' stroke-width='2'/><text x='640' y='134' text-anchor='middle' font-size='18'>Webサーバ</text><line x1='150' y1='128' x2='280' y2='62' stroke='#111827' stroke-width='3'/><line x1='150' y1='128' x2='280' y2='194' stroke='#111827' stroke-width='3'/><line x1='430' y1='194' x2='570' y2='128' stroke='#111827' stroke-width='3'/></svg>",
+    "choices": [
+      "DNSサーバ",
+      "ルータ",
+      "Webサーバ",
+      "スイッチングハブ"
+    ],
+    "answer": 0,
+    "explanation": "DNSサーバはドメイン名をIPアドレスに対応付ける名前解決を行う。Webページそのものを返すのはWebサーバである。"
+  },
+  {
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "id": "network_device_svg_002",
+    "question": "図のPC-AからPC-Bへ同一LAN内でデータを送るとき、スイッチングハブが転送先を判断するために主に用いる情報はどれか。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 760 220' role='img' aria-label='PC-A、スイッチングハブ、PC-Bの図'><rect x='55' y='82' width='120' height='56' rx='8' fill='#e0f2fe' stroke='#111827' stroke-width='2'/><text x='115' y='116' text-anchor='middle' font-size='18'>PC-A</text><rect x='300' y='82' width='160' height='56' rx='8' fill='#fef3c7' stroke='#111827' stroke-width='2'/><text x='380' y='116' text-anchor='middle' font-size='18'>スイッチングハブ</text><rect x='585' y='82' width='120' height='56' rx='8' fill='#e0f2fe' stroke='#111827' stroke-width='2'/><text x='645' y='116' text-anchor='middle' font-size='18'>PC-B</text><line x1='175' y1='110' x2='300' y2='110' stroke='#111827' stroke-width='3'/><line x1='460' y1='110' x2='585' y2='110' stroke='#111827' stroke-width='3'/><text x='240' y='92' text-anchor='middle' font-size='14'>LAN</text><text x='522' y='92' text-anchor='middle' font-size='14'>LAN</text></svg>",
+    "choices": [
+      "宛先MACアドレス",
+      "宛先のURL",
+      "電子メールアドレス",
+      "HTMLファイル名"
+    ],
+    "answer": 0,
+    "explanation": "スイッチングハブはMACアドレス表を用いて、どのポートへフレームを転送するかを判断する。"
+  },
+  {
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "id": "network_device_svg_003",
+    "question": "図のPCをネットワークへ接続した直後、IPアドレスやデフォルトゲートウェイなどを自動的に配布する機器はどれか。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 760 280' role='img' aria-label='PC、ハブ、DHCPサーバ、Webサーバの図'><rect x='50' y='112' width='110' height='56' rx='8' fill='#e0f2fe' stroke='#111827' stroke-width='2'/><text x='105' y='146' text-anchor='middle' font-size='18'>PC</text><rect x='300' y='112' width='130' height='56' rx='8' fill='#fef3c7' stroke='#111827' stroke-width='2'/><text x='365' y='146' text-anchor='middle' font-size='18'>ハブ</text><rect x='560' y='45' width='150' height='56' rx='8' fill='#dcfce7' stroke='#111827' stroke-width='2'/><text x='635' y='79' text-anchor='middle' font-size='18'>DHCPサーバ</text><rect x='560' y='180' width='150' height='56' rx='8' fill='#fee2e2' stroke='#111827' stroke-width='2'/><text x='635' y='214' text-anchor='middle' font-size='18'>Webサーバ</text><line x1='160' y1='140' x2='300' y2='140' stroke='#111827' stroke-width='3'/><line x1='430' y1='140' x2='560' y2='73' stroke='#111827' stroke-width='3'/><line x1='430' y1='140' x2='560' y2='208' stroke='#111827' stroke-width='3'/></svg>",
+    "choices": [
+      "DHCPサーバ",
+      "Webサーバ",
+      "DNSサーバ",
+      "メールサーバ"
+    ],
+    "answer": 0,
+    "explanation": "DHCPサーバは、端末にIPアドレス、サブネットマスク、デフォルトゲートウェイなどを自動設定する。"
+  },
+  {
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "id": "network_device_svg_004",
+    "question": "図のアクセスポイントの役割として最も適切なものはどれか。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 760 230' role='img' aria-label='ノートPC、アクセスポイント、ルータの図'><rect x='55' y='88' width='130' height='56' rx='8' fill='#e0f2fe' stroke='#111827' stroke-width='2'/><text x='120' y='122' text-anchor='middle' font-size='18'>ノートPC</text><path d='M230 83 q38 33 0 66' fill='none' stroke='#111827' stroke-width='3'/><path d='M253 70 q62 46 0 92' fill='none' stroke='#111827' stroke-width='3'/><rect x='330' y='88' width='170' height='56' rx='8' fill='#fef3c7' stroke='#111827' stroke-width='2'/><text x='415' y='122' text-anchor='middle' font-size='18'>アクセスポイント</text><rect x='610' y='88' width='110' height='56' rx='8' fill='#dbeafe' stroke='#111827' stroke-width='2'/><text x='665' y='122' text-anchor='middle' font-size='18'>ルータ</text><line x1='500' y1='116' x2='610' y2='116' stroke='#111827' stroke-width='3'/><text x='555' y='98' text-anchor='middle' font-size='14'>有線LAN</text></svg>",
+    "choices": [
+      "無線LANの端末を有線LANへ接続する",
+      "ドメイン名をIPアドレスへ変換する",
+      "メールを送信する",
+      "Webページを保存して公開する"
+    ],
+    "answer": 0,
+    "explanation": "アクセスポイントは、無線で接続する端末を有線LAN側のネットワークへ接続する役割を持つ。"
+  },
+  {
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "id": "network_device_svg_005",
+    "question": "図のPCがインターネット上のWebサーバにアクセスするとき、異なるネットワーク間の中継を主に担当する機器はどれか。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 220' role='img' aria-label='PC、スイッチングハブ、ルータ、インターネット、Webサーバの通信経路'><rect x='30' y='82' width='90' height='56' rx='8' fill='#e0f2fe' stroke='#111827' stroke-width='2'/><text x='75' y='116' text-anchor='middle' font-size='18'>PC</text><rect x='185' y='82' width='135' height='56' rx='8' fill='#fef3c7' stroke='#111827' stroke-width='2'/><text x='252' y='116' text-anchor='middle' font-size='17'>スイッチングハブ</text><rect x='395' y='82' width='110' height='56' rx='8' fill='#dbeafe' stroke='#111827' stroke-width='2'/><text x='450' y='116' text-anchor='middle' font-size='18'>ルータ</text><ellipse cx='610' cy='110' rx='70' ry='38' fill='#fee2e2' stroke='#111827' stroke-width='2'/><text x='610' y='116' text-anchor='middle' font-size='17'>Internet</text><rect x='720' y='82' width='70' height='56' rx='8' fill='#dcfce7' stroke='#111827' stroke-width='2'/><text x='755' y='116' text-anchor='middle' font-size='17'>Web</text><line x1='120' y1='110' x2='185' y2='110' stroke='#111827' stroke-width='3'/><line x1='320' y1='110' x2='395' y2='110' stroke='#111827' stroke-width='3'/><line x1='505' y1='110' x2='540' y2='110' stroke='#111827' stroke-width='3'/><line x1='680' y1='110' x2='720' y2='110' stroke='#111827' stroke-width='3'/></svg>",
+    "choices": [
+      "ルータ",
+      "スイッチングハブ",
+      "PC",
+      "Webブラウザ"
+    ],
+    "answer": 0,
+    "explanation": "ルータは家庭内LANや校内LANとインターネットなど、異なるネットワーク間でパケットを中継する。"
+  },
+  {
+    "category": "ネットワークとセキュリティ",
+    "difficulty": "advanced",
+    "id": "network_device_svg_006",
+    "question": "図のように、PC-AとPC-Bは同じLAN、Webサーバは別のネットワークにある。PC-AがWebサーバへアクセスする場合、PC-Aが直接送信先として指定する機器として最も適切なものはどれか。",
+    "figureSvg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 820 300' role='img' aria-label='同一LAN内のPC-A、PC-B、スイッチングハブ、ルータ、Webサーバの図'><rect x='45' y='58' width='105' height='52' rx='8' fill='#e0f2fe' stroke='#111827' stroke-width='2'/><text x='98' y='90' text-anchor='middle' font-size='17'>PC-A</text><rect x='45' y='190' width='105' height='52' rx='8' fill='#e0f2fe' stroke='#111827' stroke-width='2'/><text x='98' y='222' text-anchor='middle' font-size='17'>PC-B</text><rect x='260' y='124' width='150' height='56' rx='8' fill='#fef3c7' stroke='#111827' stroke-width='2'/><text x='335' y='158' text-anchor='middle' font-size='17'>スイッチングハブ</text><rect x='510' y='124' width='110' height='56' rx='8' fill='#dbeafe' stroke='#111827' stroke-width='2'/><text x='565' y='158' text-anchor='middle' font-size='17'>ルータ</text><rect x='690' y='124' width='105' height='56' rx='8' fill='#dcfce7' stroke='#111827' stroke-width='2'/><text x='743' y='158' text-anchor='middle' font-size='17'>Web</text><line x1='150' y1='84' x2='260' y2='152' stroke='#111827' stroke-width='3'/><line x1='150' y1='216' x2='260' y2='152' stroke='#111827' stroke-width='3'/><line x1='410' y1='152' x2='510' y2='152' stroke='#111827' stroke-width='3'/><line x1='620' y1='152' x2='690' y2='152' stroke='#111827' stroke-width='3'/><text x='236' y='46' font-size='15'>同じLAN</text><text x='636' y='112' font-size='15'>別ネットワーク</text></svg>",
+    "choices": [
+      "ルータ",
+      "PC-B",
+      "DNSサーバ",
+      "プリンタ"
+    ],
+    "answer": 0,
+    "explanation": "宛先が同じLAN内にない場合、PCはデフォルトゲートウェイであるルータへ送信し、ルータが別ネットワークへ中継する。"
+  },
+  {
+    "id": "algo_search_001",
+    "category": "コンピュータとプログラミング",
+    "difficulty": "basic",
+    "question": "昇順に並んでいるとは限らないデータから目的の値を探す場合、最も適切な探索方法はどれか。",
+    "choices": [
+      "二分探索",
+      "線形探索",
+      "選択ソート",
+      "クイックソート"
+    ],
+    "answer": 1,
+    "explanation": "データが整列されていない場合は先頭から順番に調べる線形探索を用いる。"
+  },
+  {
+    "id": "algo_search_002",
+    "category": "コンピュータとプログラミング",
+    "difficulty": "basic",
+    "question": "昇順に並んだデータ 3, 8, 12, 15, 21, 28, 35 に対して二分探索を行うとき、最初に調べる値はどれか。",
+    "choices": [
+      "3",
+      "12",
+      "15",
+      "21"
+    ],
+    "answer": 2,
+    "explanation": "中央の要素である15から調べる。"
+  },
+  {
+    "id": "algo_search_003",
+    "category": "コンピュータとプログラミング",
+    "difficulty": "standard",
+    "question": "1024件の昇順データに二分探索を行う場合、最悪でも何回程度の比較で探索できるか。",
+    "choices": [
+      "10回",
+      "32回",
+      "128回",
+      "512回"
+    ],
+    "answer": 0,
+    "explanation": "1024=2^10であるため、最悪でも約10回の比較で探索できる。"
+  },
+  {
+    "id": "algo_search_004",
+    "category": "コンピュータとプログラミング",
+    "difficulty": "standard",
+    "question": "二分探索で中央の値を調べた結果、目的の値より小さいことが分かった。次に探索する範囲として適切なものはどれか。",
+    "choices": [
+      "左半分",
+      "右半分",
+      "全体",
+      "探索終了"
+    ],
+    "answer": 1,
+    "explanation": "目的の値は中央より大きいため右半分を調べる。"
+  },
+  {
+    "id": "algo_search_005",
+    "category": "コンピュータとプログラミング",
+    "difficulty": "advanced",
+    "question": "次のうち、二分探索を利用するための条件として最も適切なものはどれか。",
+    "choices": [
+      "データ数が少ないこと",
+      "データに重複がないこと",
+      "データが整列されていること",
+      "数値データだけであること"
+    ],
+    "answer": 2,
+    "explanation": "二分探索はデータが規則的に整列されていることが前提である。"
+  },
+  {
+    "id": "algo_search_006",
+    "category": "コンピュータとプログラミング",
+    "difficulty": "advanced",
+    "question": "65536件の昇順データに対して二分探索を行う場合、最悪比較回数として最も適切なものはどれか。",
+    "choices": [
+      "約16回",
+      "約64回",
+      "約256回",
+      "約1024回"
+    ],
+    "answer": 0,
+    "explanation": "65536=2^16であるため約16回で探索できる。"
   }
 ]
