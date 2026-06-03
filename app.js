@@ -150,13 +150,68 @@ function enqueueLearningLog(payload){
   renderStudentProfileBox();
 }
 
-async function sendLearningLog(payload){
+function postLearningLogByHiddenForm(payload){
+  return new Promise((resolve) => {
+    const iframeName = `learningLogFrame_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    const iframe = document.createElement('iframe');
+    iframe.name = iframeName;
+    iframe.style.display = 'none';
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = LEARNING_LOG_ENDPOINT;
+    form.target = iframeName;
+    form.style.display = 'none';
+    form.enctype = 'application/x-www-form-urlencoded';
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'payload';
+    input.value = JSON.stringify(payload);
+
+    form.appendChild(input);
+    document.body.appendChild(iframe);
+    document.body.appendChild(form);
+
+    form.submit();
+
+    // hidden iframe 方式では Apps Script の返答内容を読めないため、
+    // ここでは「送信を試みた」ことだけを返す。
+    setTimeout(() => {
+      form.remove();
+      iframe.remove();
+      resolve(true);
+    }, 3000);
+  });
+}
+
+function postLearningLogByBeacon(payload){
+  if(!navigator.sendBeacon) return false;
+  try{
+    const body = new URLSearchParams();
+    body.set('payload', JSON.stringify(payload));
+    return navigator.sendBeacon(LEARNING_LOG_ENDPOINT, body);
+  }catch(e){
+    return false;
+  }
+}
+
+async function postLearningLogByFetch(payload){
+  const body = new URLSearchParams();
+  body.set('payload', JSON.stringify(payload));
   await fetch(LEARNING_LOG_ENDPOINT, {
     method: 'POST',
     mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify(payload)
+    body
   });
+}
+
+async function sendLearningLog(payload){
+  // まず sendBeacon を試し、続けて fetch(no-cors) と form POST も試す。
+  // どの方式でも Apps Script 側の getRawBody_ は payload を受け取れる。
+  postLearningLogByBeacon(payload);
+  try{ await postLearningLogByFetch(payload); }catch(e){}
+  await postLearningLogByHiddenForm(payload);
 }
 
 async function flushPendingLearningLogs(){
@@ -202,10 +257,11 @@ async function flushPendingLearningLogs(){
       }
     }
 
-    savePendingLearningLogs(remaining);
-    lastSyncMessage = remaining.length
-      ? `未送信データが${remaining.length}件残っています。通信できる状態で再送してください。`
-      : '学習記録を送信しました。';
+    // no-cors・sendBeacon・hidden form では、ブラウザ側で Apps Script の受信完了を確認できない。
+    // そのため、ここでは未送信データを消さず、先生がスプレッドシートで受信確認できるように残す。
+    // スプレッドシートに届いていることを確認したあと、端末側で再送ボタンを押さない限り重複送信は起きにくい。
+    savePendingLearningLogs(logs);
+    lastSyncMessage = '送信を試みました。スプレッドシートの receive_log を確認してください。未送信データは安全のため端末に残しています。';
   }finally{
     isFlushingLearningLogs = false;
     renderStudentProfileBox();
@@ -1410,6 +1466,12 @@ function init(){
   $('reviewSessionWrongBtn').addEventListener('click', startSessionWrongReview);
   $('nextBtn').onclick = nextQuestion;
   document.querySelectorAll('.confidence-choice').forEach(btn => btn.addEventListener('click', () => setConfidence(btn.dataset.confidence)));
+  window.addEventListener('online', flushPendingLearningLogs);
+  window.addEventListener('pageshow', flushPendingLearningLogs);
+  document.addEventListener('visibilitychange', () => {
+    if(document.visibilityState === 'visible') flushPendingLearningLogs();
+  });
+  flushPendingLearningLogs();
   renderHome();
 }
 

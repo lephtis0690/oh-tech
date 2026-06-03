@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Apps Script doPost 到達確認</title>
+  <style>body{font-family:sans-serif;line-height:1.8;padding:24px}button{font-size:18px;padding:12px 18px}.box{border:1px solid #ccc;padding:16px;border-radius:8px;margin:12px 0}code{background:#f2f2f2;padding:2px 4px}</style>
+</head>
+<body>
+  <h1>Apps Script doPost 到達確認</h1>
+  <p>このページは、学習サイト本体を通さずに、直接 Apps Script の <code>doPost(e)</code> へテスト送信するためのページです。</p>
+  <div class="box">
+    <p>下のボタンを押したあと、スプレッドシートの <code>receive_log</code>、<code>sessions</code>、<code>answers</code> を確認してください。</p>
+    <button id="sendBtn">doPostへテスト送信する</button>
+    <p id="msg"></p>
+  </div>
+  <script>
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbwt9wfbEaB0WEi-Bb7XsHxyo9N283sWhOljODYmOxJKmm23ff7vu4hzxTeNNwVjkoom3w/exec";
+    const payload = {
+      sessionId: "browser-post-test-" + Date.now(),
+      studentId: "1101",
+      grade: "1",
+      classNumber: "1",
+      studentNumber: "1",
+      mode: "post-test",
+      category: "到達確認",
+      difficulty: "test",
+      totalQuestions: 1,
+      correctCount: 1,
+      studySeconds: 1,
+      startedAt: new Date().toISOString(),
+      finishedAt: new Date().toISOString(),
+      appName: "OH-TECH-POST-TEST",
+      eventType: "post-test",
+      answers: [{
+        questionId: "post_test_001",
+        category: "到達確認",
+        difficulty: "test",
+        selectedIndex: 0,
+        selectedAnswer: "A",
+        correctAnswer: "A",
+        isCorrect: true
+      }]
+    };
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = ENDPOINT;
+      form.target = '_blank';
+      form.enctype = 'application/x-www-form-urlencoded';
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'payload';
+      input.value = JSON.stringify(payload);
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
+      form.remove();
+      document.getElementById('msg').textContent = '別タブが開きます。表示内容よりも、スプレッドシートの receive_log に記録が入ったかを確認してください。';
+    });
+  </script>
+</body>
+</html>
