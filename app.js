@@ -14,6 +14,7 @@ const MAX_PENDING_LOGS = 50;
 const UPDATE_HISTORY_URL = "update-history.json";
 const UPDATE_HISTORY_LIMIT = 10;
 const HISTORY_PAGE_SIZE = 10;
+const AUTOSEND_FIX_VERSION = "186-pending-loop-fix";
 
 const CATEGORY_ORDER = [
   "情報社会と法",
@@ -155,7 +156,12 @@ function enqueueLearningLog(payload){
 }
 
 function postLearningLogByHiddenForm(payload){
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
+    if(!document.body){
+      reject(new Error('document_body_not_ready'));
+      return;
+    }
+
     const iframeName = `learningLogFrame_${Date.now()}_${Math.random().toString(36).slice(2)}`;
     const iframe = document.createElement('iframe');
     iframe.name = iframeName;
@@ -167,6 +173,7 @@ function postLearningLogByHiddenForm(payload){
     form.target = iframeName;
     form.style.display = 'none';
     form.enctype = 'application/x-www-form-urlencoded';
+    form.acceptCharset = 'UTF-8';
 
     const input = document.createElement('input');
     input.type = 'hidden';
@@ -177,15 +184,22 @@ function postLearningLogByHiddenForm(payload){
     document.body.appendChild(iframe);
     document.body.appendChild(form);
 
-    form.submit();
+    try{
+      form.submit();
+    }catch(e){
+      form.remove();
+      iframe.remove();
+      reject(e);
+      return;
+    }
 
-    // hidden iframe 方式では Apps Script の返答内容を読めないため、
-    // ここでは「送信を試みた」ことだけを返す。
+    // Apps Script の返答本文はクロスオリジンのため読めない。
+    // post-test.html と同じ方式で「送信を試みた」時点を成功扱いにする。
     setTimeout(() => {
       form.remove();
       iframe.remove();
       resolve(true);
-    }, 3000);
+    }, 2500);
   });
 }
 
@@ -211,15 +225,13 @@ async function postLearningLogByFetch(payload){
 }
 
 async function sendLearningLog(payload){
-  // post-test.html と同じ hidden form POST 方式に統一する。
-  // sendBeacon や fetch(no-cors) を併用すると、同じ記録が複数回送られるため使わない。
   if(!navigator.onLine){
     throw new Error('offline');
   }
-  await postLearningLogByHiddenForm(payload);
+  return await postLearningLogByHiddenForm(payload);
 }
 
-async function flushPendingLearningLogs(){
+async function flushPendingLearningLogs(options = {}){
   const profile = loadStudentProfile();
   if(!profile){
     renderStudentProfileBox();
@@ -234,8 +246,10 @@ async function flushPendingLearningLogs(){
 
   const logs = loadPendingLearningLogs();
   if(!logs.length){
-    lastSyncMessage = '未送信データはありません。';
-    renderStudentProfileBox();
+    if(options.manual){
+      lastSyncMessage = '未送信データはありません。';
+      renderStudentProfileBox();
+    }
     return;
   }
 
@@ -249,7 +263,7 @@ async function flushPendingLearningLogs(){
   const resendBtn = $('resendLogsBtn');
   if(resendBtn) resendBtn.disabled = true;
 
-  const sentIds = new Set();
+  const snapshotIds = new Set(logs.map(item => item.id));
   const failedIds = new Set();
 
   try{
@@ -265,16 +279,22 @@ async function flushPendingLearningLogs(){
           studentNumber: profile.studentNumber
         };
         await sendLearningLog(payload);
-        sentIds.add(item.id);
       }catch(e){
         failedIds.add(item.id);
       }
     }
 
-    // 送信を試みた時点で、成功扱いのものだけ未送信キューから削除する。
-    // 送信中に新しく追加された解答は消さない。
+    // 重要：
+    // hidden form POST は成功応答を読めないため、フォーム送信まで進んだものは
+    // 「送信済み扱い」として必ずキューから外す。
+    // これにより、ページ表示・オンライン復帰・手動再送のたびに同じ未送信が
+    // 延々と送られ続けるバグを防ぐ。
+    // 送信中に新しく追加されたログは snapshotIds に含まれないため残す。
     const latestLogs = loadPendingLearningLogs();
-    const nextLogs = latestLogs.filter(item => !sentIds.has(item.id) || failedIds.has(item.id));
+    const nextLogs = latestLogs.filter(item => {
+      if(!snapshotIds.has(item.id)) return true;
+      return failedIds.has(item.id);
+    });
     savePendingLearningLogs(nextLogs);
 
     lastSyncMessage = nextLogs.length
@@ -1443,7 +1463,7 @@ function init(){
   $('startBtn').addEventListener('click', startFromFilters);
   $('saveStudentProfileBtn')?.addEventListener('click', saveStudentProfileFromForm);
   $('resetStudentProfileBtn')?.addEventListener('click', resetStudentProfileForCorrection);
-  $('resendLogsBtn')?.addEventListener('click', flushPendingLearningLogs);
+  $('resendLogsBtn')?.addEventListener('click', () => flushPendingLearningLogs({ manual: true }));
   $('categorySelect').addEventListener('change', () => { renderQuestionPicker(); renderQuestionHistory(); });
   $('difficultySelect').addEventListener('change', () => { renderQuestionPicker(); renderQuestionHistory(); });
   $('calculationSelect').addEventListener('change', () => { renderQuestionPicker(); renderQuestionHistory(); });
@@ -1484,12 +1504,9 @@ function init(){
   $('reviewSessionWrongBtn').addEventListener('click', startSessionWrongReview);
   $('nextBtn').onclick = nextQuestion;
   document.querySelectorAll('.confidence-choice').forEach(btn => btn.addEventListener('click', () => setConfidence(btn.dataset.confidence)));
-  window.addEventListener('online', flushPendingLearningLogs);
-  window.addEventListener('pageshow', flushPendingLearningLogs);
-  document.addEventListener('visibilitychange', () => {
-    if(document.visibilityState === 'visible') flushPendingLearningLogs();
-  });
-  flushPendingLearningLogs();
+  // オンライン復帰時だけ未送信を再送する。pageshow/visibilitychange/初期表示では送らない。
+  // これにより、画面を戻る・タブを表示するだけで未送信が延々と再送されることを防ぐ。
+  window.addEventListener('online', () => flushPendingLearningLogs({ auto: true }));
   renderHome();
 }
 
