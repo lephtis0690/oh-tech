@@ -263,43 +263,45 @@ async function flushPendingLearningLogs(options = {}){
   const resendBtn = $('resendLogsBtn');
   if(resendBtn) resendBtn.disabled = true;
 
-  const snapshotIds = new Set(logs.map(item => item.id));
-  const failedIds = new Set();
+  // 重要：hidden form POST は Apps Script の返答をブラウザ側で読めない。
+  // そのため「送信できたか確認してから削除」しようとすると、確認不能なまま
+  // 同じ未送信データが残り、再送ボタン・onlineイベント・再表示で延々と重複送信される。
+  // ここでは、送信対象のスナップショットを先にキューから外し、送信中に新しく追加されたログだけを残す。
+  const snapshot = logs.slice();
+  const snapshotIds = new Set(snapshot.map(item => item.id));
+  const queuedAfterSnapshot = loadPendingLearningLogs().filter(item => !snapshotIds.has(item.id));
+  savePendingLearningLogs(queuedAfterSnapshot);
+  renderStudentProfileBox();
+
+  let triedCount = 0;
 
   try{
-    for(const item of logs){
-      try{
-        const stableSessionId = item.payload?.sessionId || item.id || makeClientSessionId();
-        const payload = {
-          ...item.payload,
-          sessionId: stableSessionId,
-          studentId: buildStudentId(profile),
-          grade: profile.grade,
-          classNumber: profile.classNumber,
-          studentNumber: profile.studentNumber
-        };
-        await sendLearningLog(payload);
-      }catch(e){
-        failedIds.add(item.id);
-      }
+    for(const item of snapshot){
+      const stableSessionId = item.payload?.sessionId || item.id || makeClientSessionId();
+      const payload = {
+        ...item.payload,
+        sessionId: stableSessionId,
+        studentId: buildStudentId(profile),
+        grade: profile.grade,
+        classNumber: profile.classNumber,
+        studentNumber: profile.studentNumber
+      };
+      await sendLearningLog(payload);
+      triedCount++;
     }
 
-    // 重要：
-    // hidden form POST は成功応答を読めないため、フォーム送信まで進んだものは
-    // 「送信済み扱い」として必ずキューから外す。
-    // これにより、ページ表示・オンライン復帰・手動再送のたびに同じ未送信が
-    // 延々と送られ続けるバグを防ぐ。
-    // 送信中に新しく追加されたログは snapshotIds に含まれないため残す。
-    const latestLogs = loadPendingLearningLogs();
-    const nextLogs = latestLogs.filter(item => {
-      if(!snapshotIds.has(item.id)) return true;
-      return failedIds.has(item.id);
-    });
-    savePendingLearningLogs(nextLogs);
-
-    lastSyncMessage = nextLogs.length
-      ? `未送信データが${nextLogs.length}件残っています。通信できる状態で再送してください。`
-      : '学習記録を送信しました。';
+    const pending = getPendingLogCount();
+    lastSyncMessage = pending
+      ? `${triedCount}件の送信を試みました。新しい未送信データが${pending}件あります。`
+      : `${triedCount}件の送信を試みました。未送信データはありません。`;
+  }catch(e){
+    // ここに来るのは、フォーム送信前に例外が出た場合だけ。
+    // その場合は送信できていない可能性が高いので、まだ残っていない分だけ戻す。
+    const current = loadPendingLearningLogs();
+    const currentIds = new Set(current.map(item => item.id));
+    const restore = snapshot.filter(item => !currentIds.has(item.id));
+    savePendingLearningLogs([...current, ...restore]);
+    lastSyncMessage = `送信前にエラーが発生したため、未送信データを残しました。${String(e)}`;
   }finally{
     isFlushingLearningLogs = false;
     renderStudentProfileBox();
