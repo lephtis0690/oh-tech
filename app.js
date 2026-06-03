@@ -141,12 +141,16 @@ function enqueueLearningLog(payload){
   if(!nextPayload.sessionId){
     nextPayload.sessionId = makeClientSessionId();
   }
-  logs.push({
-    id: nextPayload.sessionId,
+
+  const id = nextPayload.sessionId;
+  const filtered = logs.filter(item => item.id !== id);
+  filtered.push({
+    id,
     payload: nextPayload,
     createdAt: new Date().toISOString()
   });
-  savePendingLearningLogs(logs);
+
+  savePendingLearningLogs(filtered);
   renderStudentProfileBox();
 }
 
@@ -207,10 +211,11 @@ async function postLearningLogByFetch(payload){
 }
 
 async function sendLearningLog(payload){
-  // まず sendBeacon を試し、続けて fetch(no-cors) と form POST も試す。
-  // どの方式でも Apps Script 側の getRawBody_ は payload を受け取れる。
-  postLearningLogByBeacon(payload);
-  try{ await postLearningLogByFetch(payload); }catch(e){}
+  // post-test.html と同じ hidden form POST 方式に統一する。
+  // sendBeacon や fetch(no-cors) を併用すると、同じ記録が複数回送られるため使わない。
+  if(!navigator.onLine){
+    throw new Error('offline');
+  }
   await postLearningLogByHiddenForm(payload);
 }
 
@@ -227,9 +232,15 @@ async function flushPendingLearningLogs(){
     return;
   }
 
-  let logs = loadPendingLearningLogs();
+  const logs = loadPendingLearningLogs();
   if(!logs.length){
     lastSyncMessage = '未送信データはありません。';
+    renderStudentProfileBox();
+    return;
+  }
+
+  if(!navigator.onLine){
+    lastSyncMessage = `オフラインのため、未送信データが${logs.length}件残っています。`;
     renderStudentProfileBox();
     return;
   }
@@ -238,7 +249,9 @@ async function flushPendingLearningLogs(){
   const resendBtn = $('resendLogsBtn');
   if(resendBtn) resendBtn.disabled = true;
 
-  const remaining = [];
+  const sentIds = new Set();
+  const failedIds = new Set();
+
   try{
     for(const item of logs){
       try{
@@ -252,16 +265,21 @@ async function flushPendingLearningLogs(){
           studentNumber: profile.studentNumber
         };
         await sendLearningLog(payload);
+        sentIds.add(item.id);
       }catch(e){
-        remaining.push(item);
+        failedIds.add(item.id);
       }
     }
 
-    // no-cors・sendBeacon・hidden form では、ブラウザ側で Apps Script の受信完了を確認できない。
-    // そのため、ここでは未送信データを消さず、先生がスプレッドシートで受信確認できるように残す。
-    // スプレッドシートに届いていることを確認したあと、端末側で再送ボタンを押さない限り重複送信は起きにくい。
-    savePendingLearningLogs(logs);
-    lastSyncMessage = '送信を試みました。スプレッドシートの receive_log を確認してください。未送信データは安全のため端末に残しています。';
+    // 送信を試みた時点で、成功扱いのものだけ未送信キューから削除する。
+    // 送信中に新しく追加された解答は消さない。
+    const latestLogs = loadPendingLearningLogs();
+    const nextLogs = latestLogs.filter(item => !sentIds.has(item.id) || failedIds.has(item.id));
+    savePendingLearningLogs(nextLogs);
+
+    lastSyncMessage = nextLogs.length
+      ? `未送信データが${nextLogs.length}件残っています。通信できる状態で再送してください。`
+      : '学習記録を送信しました。';
   }finally{
     isFlushingLearningLogs = false;
     renderStudentProfileBox();
